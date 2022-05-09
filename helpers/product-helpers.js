@@ -6,7 +6,8 @@
 
     db.get().collection('product').insertOne(product).then((data)=>{
           
-      callback(data._id)
+      console.log("data",data);
+      callback(data.insertedId)
     })
   },    
      getAllProducts:()=>{
@@ -18,3 +19,4 @@
      }
    
 }
+ 
