@@ -6,11 +6,11 @@
 
     db.get().collection('product').insertOne(product).then((data)=>{
           
-      console.log("data",data);
+      console.log("data",data);  
       callback(data.insertedId)
     })
   },    
-     getAllProducts:()=>{
+     getAllProducts:()=>{ 
 
         return new Promise(async(resolve,reject)=>{
              let products=await db.get().collection(collection.PRODUCT_COLLECTION).find().toArray()

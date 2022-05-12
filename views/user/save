@@ -1,0 +1,2 @@
+// userData.password=brypt.hash(userData.password,salt)
+//      db.get()collection

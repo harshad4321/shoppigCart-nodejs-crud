@@ -17,21 +17,19 @@ router.get("/add-product", function (req, res) {
 });
 
 router.post("/add-product", (req, res, next) => {
-  productHelpers.addProduct(req.body, (insertedId) => {
-    const image =req.files.Image;
-    const imageName = image.name;
-     const imgPath = './public/product-images/'+imageName;
-    console.log(imgPath);
+  productHelpers.addProduct(req.body, (id) => {
 
-    console.log(insertedId);
-    image.mv( imgPath+insertedId+'.jpg',(err) => {
-      if (!err) {
-        res.render("admin/add-product");
+    let image=req.files.Image ;
+    const imageName = id.jpg ;
+    image.mv('./public/product-images/'+id+'.jpg',(err,done)=> {
+
+      if (!err) { 
+        res.render("admin/add-product"); 
       } else {
         console.log(err);
-      }
-    });
-  });
-});
+      }  
+    });  
+  });        
+});   
 
 module.exports = router;

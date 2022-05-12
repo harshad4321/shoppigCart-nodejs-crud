@@ -12,9 +12,9 @@ router.get("/", function (req, res, next) {
   });
  
 
-  
+   
 });
-router.get('/login',(req,res)=>{
+router.get('/login',(req,res)=>{ 
    res.render('user/login')
 })
 router.get('/signup',(req,res)=>{
