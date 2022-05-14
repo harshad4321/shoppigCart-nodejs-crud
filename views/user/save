@@ -1,2 +1,21 @@
 // userData.password=brypt.hash(userData.password,salt)
 //      db.get()collection
+
+
+
+
+// module.exports={
+//     doSignup:(userData)=>{
+//         return new Promise(async(resolve,reject)=>{
+//              const salt=   await bcrypt.genSalt(10);
+//               userData.Password= await  bcrypt.genSalt(10,(err,salt) => {
+//                 bcrypt.hash(userData.password, salt )
+                 
+
+
+//                  db.get().collection(collection.USER_COLLECTION).insertOne(userData).then((data)=>{
+
+//                     resolve(data) 
+//                 });
+//                 });
+//             })

@@ -19,6 +19,7 @@
     "hbs": "^4.2.0",
     "http-errors": "~1.6.3",
     "mongodb": "^4.5.0",
+    "mongoose": "^6.3.3",
     "morgan": "~1.9.1"
   }
 }
