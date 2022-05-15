@@ -1,34 +1,28 @@
  
-//   const mongoose = require('mongoose');
+ const mongoose = require('mongoose');
  var db=require('../config/connection')
  var collection=require('../config/collections')
  const bcrypt=require('bcrypt')
-//  const UserSchema = mongoose.Schema({
-//     email: {
-// 		type: String,
-// 		required: true
-// 	},
-//     password: {
-// 		type: String,
-// 		required: true
-// 	}
+ 
 
-//  })
-//  const User = module.exports = mongoose.model(collection.USER_COLLECTION, UserSchema);
+ 
 
 module.exports={
     doSignup:(userData)=>{
-        return new Promise(async(resolve,reject)=>{
-             const salt=   await bcrypt.genSalt(10);
-              userData.Password= await  bcrypt.genSalt(10,(err,salt,hash) => {
-                 
+        return new Promise (async(resolve,reject)=>{
+         userData.password=  salt=   await bcrypt.genSalt(10);
+
+   const hashedpassword=  await  bcrypt.hash(userData.password,10,(err, password,hash) => {
+
                 if(err) throw (err);
                  else
-                userData.Password=hash;
-                 db.get().collection(collection.USER_COLLECTION).insertOne(userData).then((data)=>{
+                password=hash
+             
+            
+                  db.get().collection(collection.USER_COLLECTION).insertOne(userData).then((data)=>{
 
                     resolve(data.insertedId) 
-                    console.log(userData.Password)
+                    console.log(userData.password)
      
                 });
                 });
