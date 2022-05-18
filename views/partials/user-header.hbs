@@ -35,17 +35,21 @@
           <button class="btn btn-secondary dropdown-toggle btn btn-outline-success mr-4"
             class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-
-
+            {{#if user}}
+            {{user.name}}
+            {{else}}
             Account
+            {{/if}}
 
           </button>
           </a>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-
+            {{#if user}}
+            <a class="dropdown-item" href="/logout">Logout</a>
+            {{else}}
             <a class="dropdown-item" href="/login">Login</a>
 
-
+            {{/if}}
 
           </div>
         </div>
