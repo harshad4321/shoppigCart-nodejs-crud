@@ -2,7 +2,9 @@
   <div class="col-md-6 m-auto">
     <div class="container mt-5 pl-5">
       <form action="/login" method='post'>
-
+        {{#if loginErr}}
+        <p class="error">{{loginErr}} </p>
+        {{/if}}
         <!-- Email input -->
         <div class="form-group">
           <input type="email" id="email" name="email" placeholder="Enter a valid email address"
