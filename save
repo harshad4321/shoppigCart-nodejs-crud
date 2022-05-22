@@ -10,12 +10,39 @@
 //              const salt=   await bcrypt.genSalt(10);
 //               userData.Password= await  bcrypt.genSalt(10,(err,salt) => {
 //                 bcrypt.hash(userData.password, salt )
-                 
+
 
 
 //                  db.get().collection(collection.USER_COLLECTION).insertOne(userData).then((data)=>{
 
-//                     resolve(data) 
+//                     resolve(data)
 //                 });
 //                 });
 //             })
+
+
+
+
+// -------------
+// if (error) {
+// console.log("login error");
+//     // resolve({status:false})
+// } else {
+//     if (!status) {
+//         console.log('login status failed');
+//         // resolve({status:false})
+//     } else {
+//         console.log("login success....")
+//         // response.user=user
+//         // response.status=true
+//         // resolve(response)
+
+//     }
+// }
+// })
+// }) }else {
+//     console.log("login failed due to email not there")
+
+// }
+// })
+// }

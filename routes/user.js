@@ -27,12 +27,15 @@ router.get('/signup',(req,res)=>{
 router.post('/signup',(req,res)=>{
     userHelpers.doSignup(req.body).then((response)=>{
       console.log(req.body);   
+      // req.session.loggedIn = true
+      // req.session.user=response
+      // res.redirect('/')
    })
-
 });
 router.post('/login',(req,res)=>{
    userHelpers.doLogin(req.body)
-     console.log(req.body) //.then((response)=>{   
+}); 
+   //   console.log(req.body) //.then((response)=>{   
       //    console.log(response);
       //   console.log(req.body);
       //    if(response.status){
@@ -44,13 +47,27 @@ router.post('/login',(req,res)=>{
       //       res.redirect('/login')
       //    }
       // });
-}); 
+
 
 // router.get('/logout',(req,res)=>{
 //    req.session.destroy()
 //    res.redirect('/')
 // })
+// router.get('/cart',verifyLogin,async(req,res)=>{
+//    let products =await userHelpers.getCartProducts(req.session.user._id)
+//    console.log(products);
+//  res.render('user/cart')
+// })
 
+
+router.get('/cart',(req,res)=>{
+   res.render(`user/cart`)
+})
+router.get('/add-to-cart/:id',(req,res)=>{
+userHelpers.addToCart(req.params.id,req.seccion.user._id).then(()=>{
+   res.redirect('product')
+})
+})
 
 module.exports = router;
 
@@ -59,7 +76,7 @@ module.exports = router;
    //   console.log(req.body);
    //    if(response.status){
    //       req.session.loggedIn=true 
-   //       req.session.user=response.user 
+   //       req.session.user=response.user  
    //       res.redirect('/')
    //    }else{
    //       //  req.session.loginErr="Invalid username or password"
