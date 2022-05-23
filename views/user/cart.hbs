@@ -1,1 +1,44 @@
-<h2>Cart is empty</h2>
+<section>
+    <div class="container">
+        <table class="table  mt-5">
+            <thead>
+                <tr>
+                    <th scope="col">Products</th>
+                    <th scope=" col">Name</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each products}}
+                <tr>
+                    <td><img style="width: 70px;height: 70px;" src="/product-images/{{this._id}}.jpg" alt=""></td>
+                    <td>{{this.Name}}
+                    </td>
+                    <td>
+                        <div class="col-md-5 col-lg-5 d-flex ">
+                            <button class="btn btn-link px-2"
+                                onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                                <i class="fas fa-minus"></i>
+                            </button>
+
+                            <input id="form1" min="0" name="quantity" value="1" type="number"
+                                class="form-control form-control-sm" />
+
+                            <button class="btn btn-link px-2"
+                                onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                    </td>
+                    <td>
+                        {{this.Price}}
+                    </td>
+                    <td>
+                        <a href="" class="btn btn-danger">Remove</a>
+                    </td>
+                    {{/each}}
+            </tbody>
+        </table>
+    </div>
+</section>
