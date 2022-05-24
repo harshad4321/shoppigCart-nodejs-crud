@@ -81,7 +81,14 @@ userHelpers.addToCart(req.params.id,req.session.user._id).then(()=>{
    res.json({status:true})
 })
 })
+router.post('/change-product-Quandity',(req,res,next)=>{
+   console.log(req.body);
+   userHelpers.changeproductQuandity(req.body).then((response)=>{
+      console.log('heloooo..........')
+      res.json(response)
 
+   })
+})
 
 module.exports = router;
 

@@ -1,44 +1,69 @@
 <section>
-    <div class="container">
-        <table class="table  mt-5">
-            <thead>
-                <tr>
-                    <th scope="col">Products</th>
-                    <th scope=" col">Name</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Price</th>
-                </tr>
-            </thead>
-            <tbody>
-                {{#each products}}
-                <tr>
-                    <td><img style="width: 70px;height: 70px;" src="/product-images/{{this._id}}.jpg" alt=""></td>
-                    <td>{{this.Name}}
-                    </td>
-                    <td>
-                        <div class="col-md-5 col-lg-5 d-flex ">
-                            <button class="btn btn-link px-2"
-                                onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                                <i class="fas fa-minus"></i>
-                            </button>
 
-                            <input id="form1" min="0" name="quantity" value="1" type="number"
-                                class="form-control form-control-sm" />
+    <style=" background-color: hsla(0, 0%, 100%, 0.9) !important; backdrop-filter: saturate(200%) blur(25px)">
+        </style>
+        <div class="container   bg-glass">
+            <table class="table  mt-5 ">
+                <thead>
+                    <tr>
+                        <th scope="col">Products</th>
+                        <th scope=" col">Name</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Price </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each products}}
+                    <tr>
 
-                            <button class="btn btn-link px-2"
-                                onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </div>
-                    </td>
-                    <td>
-                        {{this.Price}}
-                    </td>
-                    <td>
-                        <a href="" class="btn btn-danger">Remove</a>
-                    </td>
-                    {{/each}}
-            </tbody>
-        </table>
-    </div>
+
+                        <td><img style="width: 70px;height: 70px;" src="/product-images/{{this.product._id}}.jpg"
+                                alt="">
+                        </td>
+                        <td>{{this.product.Name}}
+
+                        </td>
+                        <td>
+                            <button class="cart-item-count  btn btn-primary mr-3"
+                                onclick="changeQuandity('{{this._id}}',' {{this.product._id}}',-1)">-</button>
+                            <span id="{{this.product._id}}">{{this.quantity}}</span>
+                            <button class=" cart-item-count btn btn-primary mr-3"
+                                onclick="changeQuandity('{{this._id}}',' {{this.product._id}}',1)">+</button>
+                        </td>
+
+                        <td>
+                            <a href="" class="btn btn-danger">Remove</a>
+                        </td>
+                        {{/each}}
+                </tbody>
+            </table>
+        </div>
 </section>
+<script>
+    function changeQuandity(cartId, proId, count) {
+        let quantity = parseInt(document.getElementById(proId).innerHTML)
+        count = parseInt(count)
+
+
+        $.ajax({
+            url: '/change-product-Quandity',
+            data: {
+                cart: cartId,
+                product: proId,
+                count: count,
+                quantity: quantity
+            },
+            method: 'post',
+            success: (response) => {
+                if (response.removeProduct) {
+                    alert("Product Removed from Cart")
+                    location.reload()
+                } else {
+                    document.getElementById(proId).innerHTML = quantity + count
+                }
+            }
+
+
+        })
+    }
+</script>
