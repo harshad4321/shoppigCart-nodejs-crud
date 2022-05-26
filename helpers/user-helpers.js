@@ -215,7 +215,57 @@ if(proExist!=-1){
         console.log(total[0].total)
         resolve(total[0].total)
     })
-} 
+} ,
+placeOrder:(order,products,total)=>{
+return new Promise((resolve,reject)=>{
+    console.log(order,products,total);
+    let status=order['payment-method']==='COD'?'placed':'pending'
+    let orderObj={
+       deliveryDetails:{
+            mobile:order.mobile,
+              houseadd:order.houseadd,
+            apartment:order. apartment,
+            email:order.email,
+            city:order.city,
+            fname:order.fname,
+            lname: order.lname,
+            selection:order.selection
+          
+
+        },
+        userId:objectId(order.userId),
+        paymentMethord:order['payment-method'],
+        products:products,
+        totalAmount:total,
+        status:status,
+        data:new Date
+    }
+
+    db.get().collection(collection.ORDER_COLLECTION).insertOne(orderObj).then((response)=>{
+        db.get().collection(collection.CART_COLLECTION). deleteOne({user:objectId(order.userId)})
+        resolve()
+
+    })
+})
+},
+getCartProductlist:(userId)=>{
+    return new Promise(async(resolve,reject)=>{
+        let cart= await db.get().collection(collection.CART_COLLECTION).findOne({user:objectId(userId)})
+        resolve(cart.products)
+
+    })
+
+},
+getUserOrder:(userId)=>{
+    return new Promise(async(resolve,reject)=>{
+        console.log(userId);
+        let orders=await db.get.collection(collection.ORDER_COLLECTION)
+        .find({userId:objectId(userId)}).toArray()
+        console.log(orders);
+        resolve(orders)
+    })
+
+}
   
   }
 

@@ -5,7 +5,8 @@ var express = require("express");
 var router = express.Router();
 const productHelpers = require('../helpers/product-helpers');
 const userHelpers = require("../helpers/user-helpers");
-const multer = require('multer')
+const multer = require('multer');
+const { placeOrder } = require("../helpers/user-helpers");
 
 const verifyLogin=(req,res,next)=>{
    if (req.session.loggedIn){
@@ -91,12 +92,28 @@ router.post('/change-product-quandity',(req,res,next)=>{
       res.json(response) 
 
    })
-})
+}) 
  
 router.get('/place-order',verifyLogin,async(req,res)=>{
    let  total=await userHelpers.getTotalAmount(req.session.user._id)
-   res.render('user/place-order',{total})
-   
+   res.render('user/place-order',{total,user:req.session.user})
+  
+})
+router.post('/place-order',async(req,res)=>{
+   let products=await userHelpers.getCartProductlist(req.body.userId)
+   let totalPrice=await userHelpers.getTotalAmount(req.body.userId)
+   userHelpers.placeOrder(req.body,products,totalPrice).then((responce)=>{
+ res.json({status:true})
+   })
+   console.log(req.body);
+  
+}),
+router.get( '/order-success',(req,res)=>{ 
+  res.render('user/order-success',{user:req.session.user})
+})
+router.get( '/orders',async(req,res)=>{
+   let orders=await userHelpers.getUserOrder(req.session.user._id) 
+   res.render('user/orders',{user:req.session.user,orders})
 })
 module.exports = router;
 
