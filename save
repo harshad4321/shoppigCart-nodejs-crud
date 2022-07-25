@@ -19,7 +19,35 @@
 //                 });
 //                 });
 //             })
+// {/* <script>
+//     function return (cartId, proId, userId, count) {
+//         let quantity = parseInt(document.getElementById(proId).innerHTML)
+//         count = parseInt(count)
+//         console.log(userId)
+//         $.ajax({
+//             url: './return',
+//             data: {
+//                 user: userId,
+//                 cart: cartId,
+//                 product: proId,
+//                 count: count,
+//                 quantity: quantity,
+//             },
+//             method: 'POST',  // http method
+//             // data to submit --}}
+//             success: (response) => {
+//                 if (response.removeProduct) {
+//                     alert("Product Removed from Cart")
+//                     location.reload()
+//                     error: function (jqXhr, textStatus, errorMessage) { // if any error come then 
+//                         $('p').append('Error' + errorMessage);
+//                     }
+//                 }
+//             }
 
+//         });
+//     }
+// </script> */}
 
 
 
@@ -46,3 +74,51 @@
 // }
 // })
 // }
+
+
+// ...........................
+// <script>
+// function removeProduct(cartId, proId) {
+//     console.log("hai..,"proId)
+//     $.ajax({
+//         url: '/remove-product',
+//         data: {
+
+//             cart: cartId,
+//             product: proId,
+//         },
+//         method: 'post',
+//         success: (response) => {
+//             if (response.removeProduct) {
+//                 alert("Product Removed from Cart")
+//                 location.reload()
+
+//             }
+//         }
+//     })
+// }
+
+// </script>
+///////////////////////////////////////////////
+//  function removeProduct(cartId, proId) {
+
+//     $.ajax({
+//         url: '/remove-product',
+//         data: {
+//             product: proId,
+//             cart: cartId,
+//         },
+//         method: 'post',
+//         success: (response) => {
+//             if (response.removeProduct) {
+//                 alert("Product Removed Successfully")
+//                 location.reload()
+
+//             } else {
+//                 document.getElementById(proId).innerHTML = response.removeProduct
+//             }
+//         }
+//     });
+
+// };
+

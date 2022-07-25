@@ -23,6 +23,7 @@
                         <td>Rs.{{this.product.Price}} </td>
 
                         <td>
+
                             <button class="cart-item-count btn btn-primary mr-3"
                                 onclick="changeQuandity('{{this._id}}','{{this.product._id}}','{{../user}}',-1)">
                                 -</button>
@@ -32,14 +33,19 @@
                         </td>
 
                         <td>
-                            <a href="" class="btn btn-danger">Remove</a>
+
+                            <button id=" Remove" class=" btn btn-danger"
+                                onclick=" removeProduct ('{{this._id}}','{{this.product._id}}')">
+                                remove</button>
+
+
                         </td>
                     </tr>
                     {{/each}}
                 </tbody>
             </table>
             <hr>
-            <div class="float-right  pr-5">
+            <div class=" float-right pr-5">
                 <h5 class="float-left mr-5"> TOTAL: RS.<span id="total">{{totalValue}}</span> </h5>
                 <br> <a href=" /place-order" class=" btn btn-success mt-3" style="width: 100%;">
                     <b>Place Order</b>
@@ -61,7 +67,7 @@
                 cart: cartId,
                 product: proId,
                 count: count,
-                quantity: quantity
+                quantity: quantity,
             },
             method: 'post',
             success: (response) => {
@@ -71,9 +77,34 @@
                 } else {
                     document.getElementById(proId).innerHTML = quantity + count
                     document.getElementById('total').innerHTML = response.total
+
                 }
             }
 
         })
     }
+
+</script>
+<script>
+    function removeProduct(cartId, proId) {
+        $.ajax({
+            url: '/remove-product',
+            data: {
+                product: proId,
+                cart: cartId,
+            },
+            method: 'post',
+            success: (response) => {
+                if (response.removeProduct) {
+                    alert('Product Removed Successfully');
+                    location.reload();
+                } else {
+                    document.getElementById(proId).innerHTML = response.removeProduct
+                }
+            }
+        });
+
+    };
+
+
 </script>
