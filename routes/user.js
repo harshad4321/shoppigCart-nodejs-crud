@@ -93,7 +93,7 @@ router.get('/cart',verifyLogin,async(req,res)=>{
 
 
 router.get('/add-to-cart/:id',(req,res)=>{
-  console.log("api call.......")
+//   console.log("api call.......")
 userHelpers.addToCart(req.params.id,req.session.user._id).then(()=>{
    res.json({status:true})
 })
@@ -114,6 +114,8 @@ router.get('/place-order',verifyLogin,async(req,res)=>{
    res.render('user/place-order',{total,user:req.session.user})
   
 })
+//checking Payment 
+
 router.post('/place-order',async(req,res)=>{
    let products=await userHelpers.getCartProductlist(req.body.userId)
    let totalPrice=await userHelpers.getTotalAmount(req.body.userId)
