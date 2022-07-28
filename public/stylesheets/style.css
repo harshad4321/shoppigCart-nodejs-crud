@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(241, 242, 238);
+  background-color: rgba(47, 47, 44, 0.432);
 }
 
 header {
@@ -11,6 +11,19 @@ header {
   font-family: ' Edu VIC WA NT Beginner', cursive;
 }
 
-/* #carouselExampleIndicators {
-  height: 0%
-} */
+/* Next & previous buttons */
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
