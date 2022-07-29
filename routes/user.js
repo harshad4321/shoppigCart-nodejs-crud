@@ -24,7 +24,6 @@ router.get("/", async function (req, res, next) {
   cartCount=await userHelpers.getCartCount(req.session.user._id)
  }
  productHelpers.getAllProducts().then((products)=>{ 
-     
   res.render('user/view-product',{products,user,cartCount})   
    });
 });
@@ -168,7 +167,11 @@ router.post('/remove-product',(req,res)=>{
 
    })
 }) 
- 
+ router.get('/over-view-product/:id',async(req,res)=>{
+   let products=await userHelpers.changePaymentStatus(req.params.id)  
+   console.log('0000000000000000000>>----->>>>>>>>>',req.params.id) 
+    res.render('user/over-view-product',{user:req.session.user,products}) 
+ })
 
 module.exports = router;      
 

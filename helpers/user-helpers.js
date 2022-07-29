@@ -342,7 +342,6 @@ resolve(order)
          }
         })
     },
-
   changePaymentStatus:(orderId)=>{
       return new Promise ((resolve,reject)=>{
           db.get().collection(collection.ORDER_COLLECTION)
@@ -370,7 +369,44 @@ resolve(order)
         })
     
   })
-}
+},
+// uniqueProduct:
+getUniqueProducts:(uniqueId)=>{
+    return new Promise(async(resolve,reject)=>{
+        let Items=await db.get().collection(collection.PRODUCT_COLLECTION).aggregate([
+            {
+                $match:{_id:objectId(uniqueId)}
+  
+            },
+            {
+                $unwind:'$products'
+            },{
+                $project:{
+                    item:'$products.item',
+                    quantity:'$products.quantity'
+            
+
+                }
+            },
+            {
+                $lookup:{
+                    from:collection.PRODUCT_COLLECTION,
+                    localField:'item',
+                    foreignField:'_id',
+                    as:'product'
+                } 
+            },
+            {
+                $project:{
+                    item:1,quantity:1,product:{$arrayElemAt:['$product',0]}
+                }
+            }
+
+        ]).toArray()
+        resolve(Items)
+    })
+},
+
 } 
 
 
