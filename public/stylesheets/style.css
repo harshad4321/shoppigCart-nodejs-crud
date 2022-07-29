@@ -7,23 +7,46 @@ header {
 
 }
 
+/* Nav bar */
 .navbar-brand {
-  font-family: ' Edu VIC WA NT Beginner', cursive;
+  font-family: ' Edu VIC WA NT Beginner',
+    cursive;
+  padding: 1.5rem 0rem;
+  /* font-size: 2.25rem; */
 }
 
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+
+
 /* Next & previous buttons */
-.prev,
-.next {
-  cursor: pointer;
+/* .carousel-control-next-icon, */
+
+
+/* Sider  */
+
+.carousel-indicators .active {
+  background-color: black;
+}
+
+.carousel-indicators {
   position: absolute;
-  top: 50%;
-  width: auto;
-  padding: 16px;
-  margin-top: -22px;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
+  right: 0;
+  bottom: -22px;
+  left: 8px;
+  z-index: 15;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding-left: 0;
+  margin-right: 15%;
+  margin-left: 16%;
+  list-style: none;
 }
