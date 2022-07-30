@@ -1,26 +1,24 @@
-{{#each products}}
-
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/">Home</a></li>
         <li class="breadcrumb-item active" aria-current="page">
-            {{Name}}
+            {{product.Name}}
         </li>
     </ol>
 </nav>
 <section>
     {{!-- <div class="container mt-5"> --}}
+
         <div class="row">
             <div class="col-12 colmd-4">
                 <div class="card" style="width: 15rem; height:24rem">
-                    <img class="card-img-top" src="/product-images/{{_id}}.jpg" alt="Card image cap"
+                    <img class="card-img-top" src="/product-images/{{product._id}}.jpg" alt="Card image cap"
                         style="height:12rem;" />
                 </div>
             </div>
-            <p class="card-text">{{Description}}</p>
-            <h5 class="card-title">{{Name}}</h5>
-            <p class="card-title">Rs.{{Price}}</p>
-            {{/each}}
+            <p class="card-text">{{product.Description}}</p>
+            <h5 class="card-title">{{product.Name}}</h5>
+            <p class="card-title">Rs.{{product.Price}}</p>
 
         </div>
     </div>
