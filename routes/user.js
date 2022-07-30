@@ -167,17 +167,6 @@ router.post('/remove-product',(req,res)=>{
 
    })
 }) 
-//  router.get('/over-view-product/:id',async(req,res)=>{
-//    try {
-//    let productId = req.params.id;
-//    const  products=await productHelpers.getProductDetails(productId)
-//    console.log('a>>>>>>>>>>>',productId)
-//       res.render('user/over-view-product',{products})   
-//    } catch (error) {
-//       res.status(500).send({message: error.message || "Error Occured" });
-//     }
-//  })
-
  router.get('/over-view-product/:id',async(req,res)=>{ 
    try {
    let product=await productHelpers.getProductDetails(req.params.id)
