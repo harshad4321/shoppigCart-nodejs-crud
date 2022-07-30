@@ -181,7 +181,6 @@ router.post('/remove-product',(req,res)=>{
  router.get('/over-view-product/:id',async(req,res)=>{ 
    try {
    let product=await productHelpers.getProductDetails(req.params.id)
-   console.log(product);
    res.render('user/over-view-product',{product})
 } catch (error) {
    res.status(500).send({message: error.message || "Error Occured" });
