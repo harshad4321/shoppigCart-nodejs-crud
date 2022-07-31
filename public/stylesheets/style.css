@@ -59,3 +59,43 @@ header {
   /* object-fit: scale-down; */
   margin-bottom: 155px;
 }
+
+/* homepage */
+
+
+#gw-layout {
+  padding: 0 10px 0;
+}
+
+
+.card {
+  background-color: #fbfbfb42;
+  border-radius: 0.5rem;
+}
+
+.card-img-top {
+  width: 100%;
+  border-top-left-radius: calc(1.25rem - 7px);
+  border-top-right-radius: calc(1.25rem - 7px);
+}
+
+.img-zoom-container {
+  position: relative;
+}
+
+.img-zoom-lens {
+  position: absolute;
+  /* border: 1px solid #d4d4d4; */
+  /*set the size of the lens:*/
+  width: 72px;
+  background-image: url(https://images-na.ssl-images-amazon.com/images/G/31/apparel/rcxgs/tile._CB483369979_.gif);
+  height: 41px;
+  cursor: pointer;
+}
+
+.img-zoom-result {
+  border: 1px solid #d4d4d4;
+  /*set the size of the result div:*/
+  width: 300px;
+  height: 300px;
+}

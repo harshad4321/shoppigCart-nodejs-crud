@@ -33,26 +33,29 @@
   </section>
   {{!-- HOME PAGE--}}
   <section>
-    <div class="container mt-5">
-      <div class="row ">
-        {{#each products}}
-        {{!-- <h4>Up to 70% off|Clearance store
-        </h4> --}}
-        <div class="col-md-3 p-3">
-          <a href="/over-view-product/{{this._id}}" class="col text-center product__link">
-            <div class="card" class="col text-center product__link" style="width: 15rem; height:24rem">
-              <img class="card-img-top" src="/product-images/{{this._id}}.jpg" alt="Card image cap"
-                style="height:12rem;" loading="lazy" />
-              <div class="card-body">
-                <h5 class="card-title">{{this.Name}}</h5>
-                <p class="card-title">Rs.{{this.Price}}</p>
-                {{!-- <p class="card-text">{{this.Description}}</p> --}}
-          </a>
-          <button onclick="addToCart('{{this._id}}')" class=" btn btn-primary">Add to cart</button>
+    <div id="gw-layout" class="a-section a-spacing-none aok-relative">
+      <div>
+        <div class=" container mt-5">
+          <div class="row ">
+            {{#each products}}
+            <div class="col-md-3 p-3">
+              <a href="/over-view-product/{{this._id}}" class="col text-center product__link">
+                <div class="card" class="col text-center product__link" style="width: 15rem; height:24rem">
+                  <img class="card-img-top" src="/product-images/{{this._id}}.jpg" alt="Card image cap"
+                    style="height:12rem;" loading="lazy" />
+                  <div class="card-body">
+                    <h5 class="card-title">{{this.Name}}</h5>
+                    <p class="card-title">Rs.{{this.Price}}</p>
+                    {{!-- <p class="card-text">{{this.Description}}</p> --}}
+              </a>
+              <button onclick="addToCart('{{this._id}}')" class=" btn btn-primary">Add to cart</button>
+            </div>
+          </div>
         </div>
+        {{/each}}
+
       </div>
     </div>
-    {{/each}}
     </div>
     </div>
     </div>
