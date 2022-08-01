@@ -15,6 +15,17 @@ header {
   font-size: 2.25rem;
 }
 
+.navbar-expand-lg .navbar-nav .nav-link {
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+  font-family: 'Rubik', sans-serif;
+  font-size: 25px;
+}
+
+.container-fluid {
+  background-color: black;
+}
+
 /* Slideshow container */
 .slideshow-container {
   max-width: 1000px;
@@ -73,6 +84,73 @@ header {
   border-radius: 0.5rem;
 }
 
+
+
+/* PRODUCTS INDEX PAGE */
+
+.title-link {
+  color: var(--black);
+  text-decoration: none;
+}
+
+.title-link:hover {
+  color: var(--dark-gray);
+  text-decoration: none;
+}
+
+.button-style {
+  background-color: #1460eeb4;
+  color: var(--ivory) !important;
+}
+
+.button-style:hover {
+  background-color: var(--light-blue);
+  color: var(--black) !important;
+}
+
+.button-style-danger {
+  background-color: var(--dark-orange);
+  color: var(--ivory) !important;
+}
+
+.button-style-danger:hover {
+  background-color: var(--light-orange);
+  color: var(--black) !important;
+}
+
+.price {
+  color: var(--dark-pink);
+  font-weight: bold;
+  font-size: 20px;
+  margin: 1px 0px 6px 0px;
+}
+
+.product-index-box {
+  padding: 0.5em;
+  margin-bottom: 1em;
+  text-align: center;
+}
+
+.product-index-box .btn {
+  width: 90%;
+  margin: 0.3em auto;
+}
+
+.product-index-box img {
+  width: 90%;
+  height: 20em;
+  object-fit: cover;
+  border: 1px solid #c2c2c2;
+  border-radius: 5px;
+}
+
+
+/* Category Card */
+
+.card:hover {
+  transform: scale(1.1);
+}
+
 .card-img-top {
   width: 100%;
   border-top-left-radius: calc(1.25rem - 7px);
@@ -96,6 +174,74 @@ header {
 .img-zoom-result {
   border: 1px solid #d4d4d4;
   /*set the size of the result div:*/
-  width: 300px;
+  width: 311px;
   height: 300px;
+}
+
+.centerColAlign {
+  margin-left: 38.0%;
+}
+
+.centerColAlign {
+  margin-right: 270px;
+}
+
+/* FOOTER */
+
+ul {
+  list-style: none;
+}
+
+.white-links {
+  margin-left: 2.5em;
+}
+
+.white-links a {
+  font-size: 14px;
+  color: var(--ivory);
+  margin-right: 1em;
+}
+
+.white-links a:hover {
+  color: var(--light-blue) !important;
+}
+
+.footer-title {
+  font-weight: 300;
+  color: whitesmoke;
+  text-transform: uppercase;
+  margin-bottom: 0.3em;
+}
+
+#contact {
+  text-align: left;
+  vertical-align: middle;
+  align-items: center;
+  color: var(--ivory);
+  background-color: var(--black);
+  padding: 1em 1em 0.2em 1em;
+  border-bottom: 5px var(--dark-blue) solid;
+}
+
+.bottom-footer {
+  font-size: 14px;
+  padding: 1em 1.5em;
+  color: var(--ivory);
+  background-color: #1a1a1a;
+}
+
+#page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+#content-wrap {
+  padding-bottom: 2.5rem;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;
 }
