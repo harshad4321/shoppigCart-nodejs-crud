@@ -39,6 +39,46 @@ router.get('/login',(req,res)=>{
 
 });
 
+
+// GET: search box
+router.get("/search", async (req, res) => {
+   const perPage = 8;
+   let page = parseInt(req.query.page) || 1;
+   const successMsg = req.flash("success")[0];
+   const errorMsg = req.flash("error")[0];
+ 
+   try {
+     const products = await products.find({
+       title: { $regex: req.query.search, $options: "i" },
+     })
+       .sort("-createdAt")
+       .skip(perPage * page - perPage)
+       .limit(perPage)
+       .populate("category")
+       .exec();
+     const count = await products.count({
+       title: { $regex: req.query.search, $options: "i" },
+     });
+     res.render("", {
+       pageName: "Search Results",
+       products,
+       successMsg,
+       errorMsg,
+       current: page,
+       breadcrumbs: null,
+       home: "/products/search?search=" + req.query.search + "&",
+       pages: Math.ceil(count / perPage),
+     });
+   } catch (error) {
+     console.log(error);
+     res.redirect("/");
+   }
+ });
+ 
+
+
+
+
 router.get('/signup',(req,res)=>{
    res.render('user/signup')
 })
