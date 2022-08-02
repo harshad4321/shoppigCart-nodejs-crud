@@ -39,47 +39,9 @@ router.get('/login',(req,res)=>{
 
 });
 
-
-// GET: search box
-router.get("/search", async (req, res) => {
-   const perPage = 8;
-   let page = parseInt(req.query.page) || 1;
-   const successMsg = req.flash("success")[0];
-   const errorMsg = req.flash("error")[0];
- 
-   try {
-     const products = await products.find({
-       title: { $regex: req.query.search, $options: "i" },
-     })
-       .sort("-createdAt")
-       .skip(perPage * page - perPage)
-       .limit(perPage)
-       .populate("category")
-       .exec();
-     const count = await products.count({
-       title: { $regex: req.query.search, $options: "i" },
-     });
-     res.render("", {
-       pageName: "Search Results",
-       products,
-       successMsg,
-       errorMsg,
-       current: page,
-       breadcrumbs: null,
-       home: "/products/search?search=" + req.query.search + "&",
-       pages: Math.ceil(count / perPage),
-     });
-   } catch (error) {
-     console.log(error);
-     res.redirect("/");
-   }
- });
  
 
-
-
-
-router.get('/signup',(req,res)=>{
+router.get('/signup',(req,res)=>{ 
    res.render('user/signup')
 })
 router.post('/signup',(req,res)=>{
@@ -111,6 +73,22 @@ router.post('/login',(req,res)=>{
    // req.session.user=false
    res.redirect('/')
 })
+
+
+
+// GET: search box
+router.post("/search",async (req, res) => {
+   try {
+      let searchTerm = req.body.searchTerm;
+      let user = req.session.user;
+      let products= await productHelpers.getProductDetails(req.params.id,{ $text: { $search: searchTerm, $diacriticSensitive: true } });
+      res.render('user/search',{products,user});
+    } catch (error) {
+      res.status(500).send({message: error.message || "Error Occured" });
+      res.redirect("/"); 
+    } 
+ });
+
 router.get('/cart',verifyLogin,async(req,res)=>{
    let products =await userHelpers.getCartProducts(req.session.user._id)
    let totalValue=0 
