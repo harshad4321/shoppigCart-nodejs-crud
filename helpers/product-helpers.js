@@ -10,7 +10,6 @@
     })
   },    
      getAllProducts:()=>{ 
-
         return new Promise(async(resolve,reject)=>{
              let products=await db.get().collection(collection.PRODUCT_COLLECTION).find().toArray()
              resolve(products)
@@ -45,10 +44,17 @@
         }
       }).then((response)=>{
         resolve()
-      })
+      }) 
     })
-
 },
+getAllProductsSearch:(Name)=>{ 
+  return new Promise((resolve,reject)=>{
+     db.get().collection(collection.PRODUCT_COLLECTION).findOne(Name).then((product)=>{
+      resolve(product)
+     })
   
+       
+  })
+}, 
 }
  

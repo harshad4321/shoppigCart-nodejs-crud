@@ -18,12 +18,12 @@ const verifyLogin=(req,res,next)=>{
 /* GET home page. */
 router.get("/", async function (req, res, next) {
  let user = req.session.user
- console.log(user);
+ console.log('>>>>>user>>',user);
  let cartCount=null
  if(req.session.user){
   cartCount=await userHelpers.getCartCount(req.session.user._id)
  }
- productHelpers.getAllProducts().then((products)=>{ 
+ productHelpers.getAllProducts().then((products)=>{
   res.render('user/view-product',{products,user,cartCount})   
    });
 });
@@ -75,19 +75,6 @@ router.post('/login',(req,res)=>{
 })
 
 
-
-// GET: search box
-router.post("/search",async (req, res) => {
-   try {
-      let searchTerm = req.body.searchTerm;
-      let user = req.session.user;
-      let products= await productHelpers.getProductDetails(req.params.id,{ $text: { $search: searchTerm, $diacriticSensitive: true } });
-      res.render('user/search',{products,user});
-    } catch (error) {
-      res.status(500).send({message: error.message || "Error Occured" });
-      res.redirect("/"); 
-    } 
- });
 
 router.get('/cart',verifyLogin,async(req,res)=>{
    let products =await userHelpers.getCartProducts(req.session.user._id)
@@ -192,7 +179,22 @@ router.post('/remove-product',(req,res)=>{
 } catch (error) {
    res.status(500).send({message: error.message || "Error Occured" });
  }
- })
+ }) 
+ 
+// GET: search box
+router.get("/search",async (req, res) => {
+   try {
+
+let searchTerm = req.query.searchTerm;
+      let product= await  productHelpers.getAllProducts({Name:{ $regex:searchTerm,$options: "$i", $diacriticSensitive: true }});
+      res.render('user/search',{product});
+      console.log('regex ><<<<<',searchTerm)
+      console.log('products><<<<<',product)
+    } catch (error) {
+      res.status(500).send({message: error.message || "Error Occured" });
+      res.redirect("/"); 
+    } 
+ });
 
 module.exports = router;      
 
