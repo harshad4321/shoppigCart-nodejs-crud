@@ -61,6 +61,7 @@ router.get('/signup',(req,res)=>{
 router.post(
    '/signup',
    [
+      
       userSignUpValidationRules(),
       validateSignup,
    ],

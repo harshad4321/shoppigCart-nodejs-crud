@@ -3,13 +3,15 @@
     <div class="col-md-8 m-auto">
       <h1 class="mt-4 mb-4">Sign Up Page</h1>
       <h2 class="text-center">Create new account</h2>
+
       {{#if errorMsg }}
       <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        {{errorMsg}}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <strong>{{errorMsg}}!</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
       {{/if}}
-
       <form action="/signup" method="POST">
         <div class="form-group">
           <!-- name input -->
@@ -28,7 +30,7 @@
         </div>
         <div class="form-group">
           <label for="password2">Verify Password</label>
-          <input type="password" class="form-control" name="password2" id="password2" />
+          <input type="password" class="form-control" name="confirm_password" id="confirm_password" />
         </div>
         <!-- Submit button -->
         <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
