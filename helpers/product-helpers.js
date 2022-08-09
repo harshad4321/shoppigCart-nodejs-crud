@@ -1,5 +1,6 @@
  var db=require('../config/connection')
  var collection=require('../config/collections')
+const { search } = require('../routes/user')
  var objectId=require('mongodb').ObjectId
  module.exports={
      addProduct:(product,callback)=>{
@@ -47,14 +48,14 @@
       }) 
     })
 },
-getAllProductsSearch:(Name)=>{ 
+getProductSearch:()=>{
   return new Promise((resolve,reject)=>{
-     db.get().collection(collection.PRODUCT_COLLECTION).findOne(Name).then((product)=>{
+   
+
+    db.get().collection(collection.PRODUCT_COLLECTION).findOne({ productName:{ $regex:'.*'+Name+'.*'} }).then((product)=>{
       resolve(product)
-     })
-  
-       
+    })
   })
-}, 
+},
+
 }
- 

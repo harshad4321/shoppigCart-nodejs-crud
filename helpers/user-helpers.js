@@ -5,6 +5,7 @@ const { response } = require('express');
 var objectId=require('mongodb').ObjectId
 const Razorpay = require('razorpay');
 const { options } = require('../routes/user');
+const { resolve } = require('path');
 var instance = new Razorpay({
     key_id: 'rzp_test_Nc7FgdyoVta2ee',
     key_secret: 'u5Yn0DsaZf0QyRxxGFzDtink',
@@ -360,7 +361,6 @@ resolve(order)
         db.get().collection(collection.CART_COLLECTION)
         .updateOne({_id:objectId(details.cart)}, 
     {
-
         $pull:{products:{item:objectId(details .product)}}
     }
         ).then((response)=>{
@@ -371,8 +371,5 @@ resolve(order)
   })
 },
 
-} 
 
-
-
- 
+}

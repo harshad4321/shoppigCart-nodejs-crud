@@ -5,6 +5,17 @@ const collections = require("../config/collections");
 var router = express.Router();
 const productHelpers = require('../helpers/product-helpers');
 const userHelpers = require("../helpers/user-helpers");
+
+const {
+   userSignUpValidationRules,
+   userSignInValidationRules,
+   validateSignup,
+   validateSignin,
+ } = require("../helpers/validator");
+
+ 
+
+
 const verifyLogin=(req,res,next)=>{
    
    console.log("req.session.user....>>>>>",req.session.loggedIn)
@@ -44,7 +55,12 @@ router.get('/login',(req,res)=>{
 router.get('/signup',(req,res)=>{ 
    res.render('user/signup')
 })
-router.post('/signup',(req,res)=>{
+router.post(
+   '/signup',
+[ userSignUpValidationRules(),
+   validateSignup],
+
+(req,res)=>{
     userHelpers.doSignup(req.body).then((response)=>{
       console.log(">>>>>>>>>>>>>",response); 
 
@@ -58,8 +74,7 @@ router.post('/login',(req,res)=>{
    userHelpers.doLogin(req.body).then((response)=>{   
          if(response.status){
             req.session.loggedIn=true 
-            req.session.user=response.user 
-           
+            req.session.user=response.user       
             res.redirect('/')
          }else{
              req.session.loginErr="Invalid username or password"
@@ -74,24 +89,20 @@ router.post('/login',(req,res)=>{
    res.redirect('/')
 })
 
-
-
 router.get('/cart',verifyLogin,async(req,res)=>{
-   let products =await userHelpers.getCartProducts(req.session.user._id)
+    let products =await userHelpers.getCartProducts(req.session.user._id)
    let totalValue=0 
-   if(products.length>0){  
+   if(products.length>0){   
 
    totalValue=await userHelpers.getTotalAmount(req.session.user._id)
-
    let proId=req.params.id
    console.log(proId);
-   
    }
- 
    console.log(products); 
    let user=req.session.user._id;
+    
    console.log("user...",user);
- res.render('user/cart',{products,user,totalValue});
+ res.render('user/cart',{products,user,totalValue,user});
   
 })
 
@@ -174,27 +185,36 @@ router.post('/remove-product',(req,res)=>{
 }) 
  router.get('/over-view-product/:id',async(req,res)=>{ 
    try {
+      let user = req.session.user
+      let cartCount=null
+ if(req.session.user){
+  cartCount=await userHelpers.getCartCount(req.session.user._id)
+ }
    let product=await productHelpers.getProductDetails(req.params.id)
-   res.render('user/over-view-product',{product})
+   res.render('user/over-view-product',{product,user,cartCount})
 } catch (error) {
    res.status(500).send({message: error.message || "Error Occured" });
  }
  }) 
  
 // GET: search box
-router.get("/search",async (req, res) => {
-   try {
 
-let searchTerm = req.query.searchTerm;
-      let product= await  productHelpers.getAllProducts({Name:{ $regex:searchTerm,$options: "$i", $diacriticSensitive: true }});
-      res.render('user/search',{product});
-      console.log('regex ><<<<<',searchTerm)
-      console.log('products><<<<<',product)
-    } catch (error) {
-      res.status(500).send({message: error.message || "Error Occured" });
-      res.redirect("/"); 
-    } 
- });
+router.post("/search",async (req, res)=> {
+   try {
+   let user = req.session.user
+   // let searchTerm = req.body.searchTerm;
+   const searchTerm = req.body.searchTerm;
+   let  product=  await productHelpers.getAllProducts({Name:{ $regex:'.*'+searchTerm+'.*'} })
+   res.render('user/search',{product,user});
+         console.log('regex ><<<<<',searchTerm)
+         console.log('product><<<<<',product)
+} catch (error) {
+         res.status(500).send({message: error.message || "Error Occured" });
+         res.redirect("/"); 
+       } 
+
+
+})
 
 module.exports = router;      
 

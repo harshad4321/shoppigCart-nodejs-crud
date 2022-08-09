@@ -67,7 +67,7 @@ header {
   padding-right: 0.5rem;
   padding-left: 0.5rem;
   font-family: 'Rubik', sans-serif;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .container-fluid {
@@ -118,6 +118,19 @@ header {
   background-position: 100% center;
 }
 
+.nav-Cart {
+
+  font-size: 30px;
+  font-family: 'Rubik', sans-serif;
+}
+
+#navbarID {
+  background-color: #ffffff;
+}
+
+.bg-light {
+  background-color: #dfdfdfe8 !important;
+}
 
 
 /* Slideshow container */
@@ -219,6 +232,11 @@ header {
   margin: 1px 0px 6px 0px;
 }
 
+.pricedetail {
+  font-weight: bold;
+}
+
+
 .product-index-box {
   padding: 0.5em;
   margin-bottom: 1em;
@@ -230,16 +248,30 @@ header {
   margin: 0.3em auto;
 }
 
-.product-index-box img {
-  width: 90%;
-  height: 20em;
-  object-fit: cover;
-  border: 1px solid #c2c2c2;
-  border-radius: 5px;
+element.style {
+  max-height: 309px;
+  max-width: 234px;
+}
+
+.lead {
+  font-size: 32px
+}
+
+element.style {
+  max-height: 309px;
+  max-width: 234px;
 }
 
 
-/* Category Card */
+
+/* Category Card {Image zoom}*/
+
+#myimage {
+  vertical-align: middle;
+  border-style: outset;
+  width: -webkit-fill-available;
+
+}
 
 .card:hover {
   transform: scale(1.1);
@@ -338,4 +370,18 @@ footer {
   bottom: 0;
   width: 100%;
   height: 2.5rem;
+}
+
+/* <admin-pannel> */
+#successEdit {
+  color: #fff;
+  background-color: #28a745;
+  border-color: #28a745;
+  margin: 10px;
+  width: 74px;
+}
+
+#successDelete {
+  cursor: pointer;
+  margin: 10px;
 }

@@ -4,24 +4,22 @@
         </style>
         <div class="container   bg-glass">
             <table class="table  mt-5 ">
+                {{#if products}}
                 <thead>
                     <tr>
                         <th scope="col">Products</th>
                         <th scope=" col">Name</th>
                         <th scope="col">Price</th>
                         <th scope="col">Quantity</th>
-
                     </tr>
                 </thead>
                 <tbody>
                     {{#each products}}
                     <tr>
-
-                        <td><img style="width: 70px;height: 70px;" src="/product-images/{{this.product._id}}.jpg"
+                        <td><img style="width: 70px;height: 70px;  " src="/product-images/{{this.product._id}}.jpg"
                                 alt=""></td>
-                        <td>{{this.product.Name}} </td>
-                        <td>Rs.{{this.product.Price}} </td>
-
+                        <td style="font-family: 'Rubik', sans-serif;"> {{this.product.Name}} </td>
+                        <td style="font-family: 'Rubik' , sans-serif;">Rs.{{this.product.Price}} </td>
                         <td>
 
                             <button class="cart-item-count btn btn-primary mr-3"
@@ -33,15 +31,14 @@
                         </td>
 
                         <td>
-
                             <button id=" Remove" class=" btn btn-danger"
                                 onclick=" removeProduct ('{{this._id}}','{{this.product._id}}')">
                                 remove</button>
-
-
                         </td>
                     </tr>
+
                     {{/each}}
+
                 </tbody>
             </table>
             <hr>
@@ -51,7 +48,13 @@
                     <b>Place Order</b>
                 </a>
             </div>
-
+            {{else}}
+            <div class="row text-center">
+                <div class="col-md-9 col-sm-9 m-auto">
+                    <h2>No items in the cart</h2>
+                </div>
+            </div>
+            {{/if}}
         </div>
 </section>
 <script>
@@ -105,6 +108,5 @@
         });
 
     };
-
 
 </script>

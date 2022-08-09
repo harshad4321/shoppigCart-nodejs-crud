@@ -18,12 +18,13 @@
     </button>
     <div class="col-md-4 col-sm-12 col-xs-12">
       <div class="search-container">
-        <form class="form-inline" action="/search" method="get">
-          <input class="search-input" id="search-box" type=" search" placeholder="Search..." name="searchTerm"
+        <form class="form-inline" action="/search" method="POST">
+          <input class=" search-input" type="search" name="searchTerm" class="form-control" placeholder="Search..."
             aria-label="Search" />
         </form>
       </div>
     </div>
+
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
@@ -31,13 +32,19 @@
           <a class="nav-link" href="/">products
             <span class="sr-only">(current)</span></a>
         </li>
+        {{#if user}}
         <li class="nav-item">
           <a class="nav-link" href="/cart">cart <span class="badge badge-success"
               id="cart-count">{{cartCount}}</span></a>
         </li>
+        {{else}}
+        <li class="nav-item">
+          <a class="nav-link" href="/signup">cart <span class="badge badge-success" id="cart-count">0</span></a>
+        </li>
+        {{/if}}
         {{#if user}}
         <li class="nav-item">
-          <a class="nav-link" href="/">Orders</a>
+          <a class="nav-link" href="/orders">Orders</a>
         </li>
         {{/if}}
         </li>
@@ -51,6 +58,7 @@
             class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
             {{#if user}}
+            Welcome
             {{user.name}}
             {{else}}
             Account
@@ -62,9 +70,7 @@
             <a class="dropdown-item" href="/logout">Logout</a>
             {{else}}
             <a class="dropdown-item" href="/login">Login</a>
-
             {{/if}}
-
           </div>
         </div>
       </form>
