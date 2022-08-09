@@ -3,11 +3,13 @@
     <div class="col-md-8 m-auto">
       <h1 class="mt-4 mb-4">Sign Up Page</h1>
       <h2 class="text-center">Create new account</h2>
-      {{!-- {{#if('errorMsg !=null' '&& ''errorMsg.length>0')}} --}}
-      <div id="flash-msg" class="alert alert-danger">
-
+      {{#if errorMsg }}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        {{errorMsg}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
-      {{!-- {{/if}} --}}
+      {{/if}}
+
       <form action="/signup" method="POST">
         <div class="form-group">
           <!-- name input -->

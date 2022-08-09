@@ -52,18 +52,21 @@ router.get('/login',(req,res)=>{
 
  
 
+// GET: display the signup form with csrf tok
 router.get('/signup',(req,res)=>{ 
-   res.render('user/signup')
+   var errorMsg = req.flash("error")[0];
+   res.render('user/signup',{errorMsg,})
 })
+// POST: handle the signup logic
 router.post(
    '/signup',
-[ userSignUpValidationRules(),
-   validateSignup],
-
-(req,res)=>{
+   [
+      userSignUpValidationRules(),
+      validateSignup,
+   ],
+   (req,res)=>{
     userHelpers.doSignup(req.body).then((response)=>{
       console.log(">>>>>>>>>>>>>",response); 
-
       req.session.loggedIn = true
       req.session.user=response
       res.redirect('/')

@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var userRouter = require('./routes/user');
 var adminRouter = require('./routes/admin');
+const flash = require("connect-flash");
 var hbs = require('express-handlebars')
 var app = express();
 var fileUpload = require('express-fileupload')
@@ -24,7 +25,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(fileUpload())
-app.use(session({secret:"Key",resave: true,saveUninitialized: true,cookie:{maxAge:600000}}))
+app.use(flash());
+app.use(
+  session({
+    secret:"Key",
+    resave: true,
+    saveUninitialized: false,
+   //session expires after 3 hours
+   cookie: { maxAge: 60 * 1000 * 60 * 3 },
+    }),
+    );
  db.connect((err)=>{ 
       if(err) console.log('connection ERROR'+err);
       else console.log("Database is connected to port 27017");
