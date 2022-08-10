@@ -1,4 +1,3 @@
-
 const { request, response } = require("express");
 var express = require("express");
 const collections = require("../config/collections");
@@ -17,7 +16,6 @@ const {
 
 
 const verifyLogin=(req,res,next)=>{
-   
    console.log("req.session.user....>>>>>",req.session.loggedIn)
    if (req.session.loggedIn){
     next()
@@ -38,30 +36,19 @@ router.get("/", async function (req, res, next) {
   res.render('user/view-product',{products,user,cartCount})   
    });
 });
-router.get('/login',(req,res)=>{ 
-   console.log('user>>>>>.',req.session.loggedIn);
-   if (req.session.loggedIn){
-      res.redirect('/')
-   }else { 
 
-      res.render('user/login',{"loginErr":req.session.loginErr})
-      req.session.loginErr =null
-   }          
 
-});
 
- 
-
-// GET: display the signup form with csrf tok
+// GET: display the signup  
 router.get('/signup',(req,res)=>{ 
    var errorMsg = req.flash("error")[0];
    res.render('user/signup',{errorMsg,})
 })
+
 // POST: handle the signup logic
 router.post(
    '/signup',
    [
-      
       userSignUpValidationRules(),
       validateSignup,
    ],
@@ -74,10 +61,30 @@ router.post(
    
    })
 });
+
+
+// GET: display the signin form
+router.get('/login',(req,res)=>{ 
+// check if a user is logged in or not
+   console.log('user>>>>>.',req.session.user);
+   if (req.session.user){
+      res.redirect('/')
+   }else { 
+      res.render('user/login',{"loginErr":req.session.loginErr})
+      req.session.loginErr=null
+   
+   }          
+});
+ 
+ 
+
+
+// POST: handle the signin logic
 router.post('/login',(req,res)=>{
    userHelpers.doLogin(req.body).then((response)=>{   
          if(response.status){
-            req.session.loggedIn=true 
+            req.session.loggedIn=true,
+            console.log('req.session.loggedIn>><<<',req.session.loggedIn)
             req.session.user=response.user       
             res.redirect('/')
          }else{
@@ -87,9 +94,13 @@ router.post('/login',(req,res)=>{
       }); 
    });  
 
- router.get('/logout',(req,res)=>{
+   
+// GET: logout
+ router.get('/logout', (req,res)=>{
    req.session.user=null 
    // req.session.user=false
+req.session.loggedIn=false
+   console.log('  req.session.user>>><<<',req.session.user)
    res.redirect('/')
 })
 

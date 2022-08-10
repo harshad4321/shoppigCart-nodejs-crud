@@ -1,49 +1,32 @@
-<div class="row">
-  <div class="col-md-6 m-auto">
-    <div class="container mt-5 pl-5">
-      <form action="/login" method='post'>
-        {{#if loginErr}}
-        <p class="error">{{loginErr}} </p>
-        {{/if}}
-        <!-- Email input -->
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 m-auto">
+      <h1 class="mt-4 mb-4">Sign In Page</h1>
+      <!-- Flash message -->
+      {{#if loginErr}}
+      <div id="flash-msg" class="alert alert-danger">
+        {{loginErr}}!
+      </div>
+      {{/if}}
+
+      <form action="/login" method="POST">
         <div class="form-group">
-          <input type="email" id="email" name="email" placeholder="Enter a valid email address"
-            class=" form-control form-control-lg" />
-          <label class="form-label" for="form1Example13">Email address</label>
+          <label for="email">Email address</label>
+          <input type="email" class="form-control" name="email" id="email" />
         </div>
-
-        <!-- Password input -->
         <div class="form-group">
-          <input type="password" id="password" name="password" placeholder="Enter password"
-            class=" form-control form-control-lg" />
-          <label class="form-label" for="form1Example23">Password</label>
+          <label for="password">Password</label>
+          <input type="password" class="form-control" name="password" id="password" />
         </div>
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+        <button type="submit" class="btn btn-primary button-style">
+          Sign In
+        </button>
+      </form>
 
-
-        <!-- 2 column grid layout for inline styling -->
-        <div class="row mb-4">
-          <div class="col d-flex justify-content-center">
-            <!-- Checkbox -->
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
-              <label class="form-check-label" for="form2Example31"> Remember me </label>
-            </div>
-          </div>
-
-          <div class="col">
-            <!-- Simple link -->
-            <a href="#!">Forgot password?</a>
-          </div>
-        </div>
-
-        <!-- Submit button -->
-        <button type="submit" class="btn btn-primary btn-lg btn-block">Log in</button>
-
-        <!-- Register buttons -->
-        <div class="text-center">
-          <p>Not a member? <a href="/signup">Register</a></p>
-
-        </div>
+      <p class="mt-3">
+        Don't have an account? <a href="/signup"> Sign Up!</a>
+      </p>
     </div>
-    </form>
   </div>
+</div>
