@@ -26,12 +26,9 @@ const userSignUpValidationRules = () => {
     })
   ];
 };
-const userSignInValidationRules = () => {
-  return [
-    check("email", "Invalid email").not().isEmpty().isEmail(),
-    check("password", "Invalid password").not().isEmpty().isLength({ min: 4 }),
-  ];
-};
+
+
+
 
 const userContactUsValidationRules = () => {
   return [
@@ -48,34 +45,24 @@ const userContactUsValidationRules = () => {
   ];
 };
 
+
+
 const validateSignup = (req, res, next) => {
-  
-    
+
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     var messages = [];
     errors.array().forEach((error) => {
       messages.push(error.msg);
-    });
+    })
     req.flash("error", messages);
-    return res.redirect("/signup");
+    return res.redirect("/user/signup");
   }
   next();
 };
 
-const validateSignin = (req, res, next) => {
-  
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    var messages = [];
-    errors.array().forEach((error) => {
-      messages.push(error.msg);
-    });
-    req.flash("error", messages);
-    return res.redirect('/login');
-  }
-  next();
-};
+
+
 
 const validateContactUs = (req, res, next) => {
   const errors = validationResult(req);
@@ -93,9 +80,9 @@ const validateContactUs = (req, res, next) => {
 
 module.exports = {
   userSignUpValidationRules,
-  userSignInValidationRules,
+ 
   userContactUsValidationRules,
   validateSignup,
-  validateSignin,
+ 
   validateContactUs,
 };

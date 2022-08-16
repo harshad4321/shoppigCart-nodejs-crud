@@ -48,14 +48,21 @@ const { search } = require('../routes/user')
       }) 
     })
 },
-getProductSearch:()=>{
-  return new Promise((resolve,reject)=>{
+// getProductSearch:()=>{
+//   return new Promise((resolve,reject)=>{
    
+//     db.get().collection(collection.PRODUCT_COLLECTION).find(
+//       {
+//       "or":[
+//         {Name:{$regex:} }
+//       ]
 
-    db.get().collection(collection.PRODUCT_COLLECTION).findOne({ productName:{ $regex:'.*'+Name+'.*'} }).then((product)=>{
-      resolve(product)
-    })
-  })
-},
+
+
+//       }).then((product)=>{
+//       resolve(product)
+//     })
+//   })
+// },
 
 }

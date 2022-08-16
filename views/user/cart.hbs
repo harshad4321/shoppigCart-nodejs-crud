@@ -1,5 +1,9 @@
-<section>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
 
+<section>
     <style=" background-color: hsla(0, 0%, 100%, 0.9) !important; backdrop-filter: saturate(200%) blur(25px)">
         </style>
         <div class="container   bg-glass">
@@ -22,12 +26,20 @@
                         <td style="font-family: 'Rubik' , sans-serif;">Rs.{{this.product.Price}} </td>
                         <td>
 
-                            <button class="cart-item-count btn btn-primary mr-3"
+                            <button type="button" id="minus" class="quantity-left-minus btn btn-danger btn-number "
                                 onclick="changeQuandity('{{this._id}}','{{this.product._id}}','{{../user}}',-1)">
-                                -</button>
-                            <span id="{{this.product._id}}">{{this.quantity}}</span>
-                            <button class="cart-item-count btn btn-primary mr-3"
-                                onclick="changeQuandity('{{this._id}}','{{this.product._id}}','{{../user}}',1)">+</button>
+                                <span class="glyphicon glyphicon-minus"></span>
+                            </button>
+                            </span>
+
+                            <span class="text-center" name=" quantity"
+                                id="{{this.product._id}}">{{this.quantity}}</span>
+
+
+                            <button type="button" class="quantity-right-plus btn btn-success btn-number "
+                                onclick="changeQuandity('{{this._id}}','{{this.product._id}}','{{../user}}',1)">
+                                <span class="glyphicon glyphicon-plus">
+                            </button>
                         </td>
 
                         <td>
@@ -43,7 +55,8 @@
             <hr>
             <div class=" float-right pr-5">
                 <h5 class="float-left mr-5"> TOTAL: RS.<span id="total">{{totalValue}}</span> </h5>
-                <br> <a href=" /place-order" class=" btn btn-success mt-3" style="width: 100%;">
+                <br> <a href=" /place-order" class="btn btn-secondary  btn btn-outline-success mt-3" id="place-order"
+                    style="width: 100%,">
                     <b>Place Order</b>
                 </a>
             </div>
@@ -60,10 +73,9 @@
     function changeQuandity(cartId, proId, userId, count) {
         let quantity = parseInt(document.getElementById(proId).innerHTML)
         count = parseInt(count)
-        console.log(userId)
 
         $.ajax({
-            url: '/change-product-quandity',
+            url: '/change-product-quantity',
             data: {
                 user: userId,
                 cart: cartId,
@@ -74,16 +86,16 @@
             method: 'post',
             success: (response) => {
                 if (response.removeProduct) {
-                    alert("Product Removed from Cart")
+                    alert("Product removed from Cart:")
                     location.reload()
                 } else {
+                    console.log('sasa', response)
                     document.getElementById(proId).innerHTML = quantity + count
                     document.getElementById('total').innerHTML = response.total
-
                 }
-            }
-
+            },
         })
+
     }
 
 </script>
@@ -98,11 +110,12 @@
             method: 'post',
             success: (response) => {
                 if (response.removeProduct) {
-                    alert('Product Removed Successfully');
+                    alert("Product is successfully removed from Cart:")
                     location.reload();
                 } else {
                     document.getElementById(proId).innerHTML = response.removeProduct
                 }
+
             }
         });
 

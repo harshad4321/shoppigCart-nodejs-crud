@@ -14,9 +14,8 @@ var instance = new Razorpay({
 module.exports={
     doSignup:(userData)=>{
         return new Promise (async(resolve,reject)=>{
-      
         userData.password=await bcrypt.hash(userData.password,10)
-               
+        userData.confirm_password=await bcrypt.hash(userData.password,10)
                   db.get().collection(collection.USER_COLLECTION).insertOne(userData).then((data)=>{
                     resolve(userData)  
                  
@@ -68,7 +67,7 @@ module.exports={
            let userCart=await db.get().collection(collection.CART_COLLECTION).findOne({user:objectId(userId)})
            if(userCart){
                let proExist=userCart.products.findIndex(product=> product.item==proId)
-console.log(proExist);
+console.log('proExist',proExist);
 if(proExist!=-1){
     db.get().collection(collection.CART_COLLECTION)
     .updateOne({user:objectId(userId),'products.item':objectId(proId)},
@@ -148,11 +147,11 @@ if(proExist!=-1){
           resolve(count)
       })
   },
-  changeproductQuandity:(details)=>{
+  changeproductQuantity:(details)=>{
     details.count=parseInt(details.count);
   details.quantity=parseInt(details.quantity)
- 
-
+console.log('details.count',details.count)
+console.log('details.quantity',details.quantity)
       return new Promise((resolve,reject)=>{
           if(details.count==-1 && details.quantity==1){
             db.get().collection(collection.CART_COLLECTION)
@@ -162,9 +161,7 @@ if(proExist!=-1){
             $pull:{products:{item:objectId(details.product)}}
         }
             ).then((response)=>{
-
-                resolve({removeProduct:true})
-            })
+                resolve({removeProduct: true})})
         }else{
       db.get().collection(collection.CART_COLLECTION)
             .updateOne({_id:objectId(details.cart),'products.item':objectId(details.product)},
@@ -173,7 +170,9 @@ if(proExist!=-1){
             }
             
             ).then((response)=>{ 
+
                 resolve({status:true})
+                
             })   
         }
 
@@ -192,7 +191,6 @@ if(proExist!=-1){
                     item:'$products.item',
                     quantity:'$products.quantity',
                  
-
                 }
             },
             {
@@ -211,18 +209,18 @@ if(proExist!=-1){
             {
                 $group:{ 
                     _id:null, 
-                    total:{$sum:{$multiply:[{ $toInt: '$quantity' },{ $toInt: '$product.Price' }]}}
+                    total:{$sum:{$multiply:[{ $toInt: '$quantity'},{ $toInt: '$product.Price' }]}}
                 }
             }
  
         ]).toArray()
-        // console.log(total[0].total)
-        resolve(total [0].total);
+       
+        resolve(total.length > 0 ? total[0].total: 0)
     })
 } ,
 placeOrder:(order,products,total)=>{
 return new Promise((resolve,reject)=>{
-    console.log(order,products,total);
+    console.log('xxxxxx',order,products,total);
     let status=order['payment-method']==='COD'?'placed':'pending'
     let orderObj={
        deliveryDetails:{
@@ -262,10 +260,10 @@ getCartProductlist:(userId)=>{
 },
 getUserOrders:(userId)=>{
     return new Promise(async(resolve,reject)=>{
-        console.log(userId);
+        console.log('userId',userId);
         let orders=await db.get().collection(collection.ORDER_COLLECTION)
         .find({userId:objectId(userId)}).toArray()
-        console.log(orders);
+        console.log('orders263',orders);
         resolve(orders); 
     })
  
@@ -302,13 +300,13 @@ getOrderProducts:(orderId)=>{
             }
 
         ]).toArray()
-      console.log(orderItems)
-      console.log("order id >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",orderId)
+      console.log('orderItems300',orderItems)
+
         resolve(orderItems)
     })
 },
 generateRazorpay:(orderId,total)=>{
-    console.log(orderId)
+   
     return new Promise((resolve,reject)=>{
 
 var options = { 
@@ -370,6 +368,14 @@ resolve(order)
     
   })
 },
+getAllSearchProducts:(regex)=>{
+    return new Promise(async(resolve,reject)=>{
+        let cartItems=await db.get().collection(collection.CART_COLLECTION).findOne('Name')
+           
+        
+          resolve(cartItems)
+      })
+  },
 
 
 }

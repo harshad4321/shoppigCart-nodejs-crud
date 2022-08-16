@@ -2,14 +2,19 @@
   <div class="row">
     <div class="col-md-8 m-auto">
       <h1 class="mt-4 mb-4">Sign In Page</h1>
-      <!-- Flash message -->
+
+      <!-- Error message -->
       {{#if loginErr}}
-      <div id="flash-msg" class="alert alert-danger">
-        {{loginErr}}!
+      <div class="alert alert-warning alert-dismissible " role="alert">
+        <strong>{{loginErr}}!</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
       {{/if}}
 
-      <form action="/login" method="POST">
+
+      <form action="/user/login" method="POST">
         <div class="form-group">
           <label for="email">Email address</label>
           <input type="email" class="form-control" name="email" id="email" />
@@ -18,7 +23,7 @@
           <label for="password">Password</label>
           <input type="password" class="form-control" name="password" id="password" />
         </div>
-        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+
         <button type="submit" class="btn btn-primary button-style">
           Sign In
         </button>

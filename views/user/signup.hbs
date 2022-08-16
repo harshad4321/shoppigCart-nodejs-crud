@@ -4,6 +4,7 @@
       <h1 class="mt-4 mb-4">Sign Up Page</h1>
       <h3 class="text-center">Create new account</h3>
 
+      <!-- Flash message -->
       {{#if errorMsg }}
       <div class="alert alert-warning alert-dismissible fade show" role="alert">
         <strong>{{errorMsg}}!</strong>
@@ -12,7 +13,8 @@
         </button>
       </div>
       {{/if}}
-      <form action="/signup" method="POST">
+
+      <form action="/user/signup" method="POST">
         <div class="form-group">
           <!-- name input -->
           <label for="name">Name</label>
@@ -33,11 +35,9 @@
           <input type="password" class="form-control" name="confirm_password" id="confirm_password" />
         </div>
         <!-- Submit button -->
-        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
         <button type="submit" class="btn btn-primary button-style">
           Sign Up
         </button>
-
         <div class="form-group">
           <p class="text-center text-muted mt-5 mb-0">Have already an account? <a href="/user/login"
               class="fw-bold text-body"><u>Login here</u></a></p>
