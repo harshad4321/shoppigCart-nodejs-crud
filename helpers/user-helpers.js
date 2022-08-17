@@ -368,19 +368,7 @@ resolve(order)
     
   })
 },
-// getAllSearchProducts:(searchTerm)=>{
-//     return new Promise(async(resolve,reject)=>{
-//         let SearchItem=await db.get().collection(collection.CART_COLLECTION)
-//         .findOne(
-//             {
-//                 "$or":[
-//                 {Name:{$regex:/searchTerm/}}
-//               ]
-//               }
-//         )
-//           resolve(SearchItem)
-//       })
-//   },
+
 
 
 }

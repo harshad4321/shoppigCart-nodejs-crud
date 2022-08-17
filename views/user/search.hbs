@@ -5,33 +5,45 @@
       {{product.Name}}
     </li>
   </ol>
-</nav>
-<h1 class="pb-4">Search Results</h1>
-<div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-  <a href="/" class="col text-center category__link">
-    <div class="category__img category__img--large shadow">
-      <img src="/product-images/{{this.product._id}}.jpg" alt="{{product.Name}}" loading="lazy">
+
+  <!-- Contents -->
+  <div class="row pl-4 pr-4">
+    <h1 class="row pl-4 pr-4">Search Results</h1>
+    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 product-index-box">
+      <div class="single-product d-flex flex-column h-100">
+        <a class="title-link" href=" /over-view-product/{{product._id}}">
+          <img src=" /product-images/{{this.product._id}}.jpg" alt="" class="img-fluid" /></a>
+        <div class="product-info">
+          <a class="title-link" href="/over-view-product/{{product._id}}">
+            <h6 class=" mt-2 mb-2">
+              {{product.Name}}
+            </h6>
+          </a>
+          <div class="price"> Price: {{product.Price}}
+          </div>
+          <div class="Brand">Brand: {{product.Brand}}
+          </div>
+        </div>
+        <button onclick="addToCart('{{product._id}}')" class=" btn btn-primary"> Add to Shopping Cart</button>
+      </div>
     </div>
-    <div class="pt-1">
-      {{product.Name}} </div>
-  </a>
-</div>
-{{else}}
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="/">Home</a></li>
-    <li class=" breadcrumb-item active " aria-current="page" style="color:rgb(255, 0, 0)">
-      {{searchTerm}}!
-    </li>
-  </ol>
-  <div class="masonry-wrapper" style=" text-align:center;">
-    <span class=" a-size-medium a-color-base">No results for
-      <span>
-        <span class="a-size-medium a-color-base">{{searchTerm}}
-          <span>
   </div>
-  <div class="a-row a-size-base a-color-base" style="text-align:center;">
-    <span>Try checking your spelling or use more general terms
-      <span>
-  </div>
-  {{/if}}
+
+  {{else}} <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Home</a></li>
+      <li class=" breadcrumb-item active " aria-current="page" style="color:rgb(255, 0, 0)">
+        {{searchTerm}}!
+      </li>
+    </ol>
+    <div class="masonry-wrapper" style=" text-align:center;">
+      <span class=" a-size-medium a-color-base">No results for
+        <span>
+          <span class="a-size-medium a-color-base">{{searchTerm}}
+            <span>
+    </div>
+    <div class="a-row a-size-base a-color-base" style="text-align:center;">
+      <span>Try checking your spelling or use more general terms
+        <span>
+    </div>
+    {{/if}}
