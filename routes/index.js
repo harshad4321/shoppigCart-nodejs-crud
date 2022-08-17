@@ -7,6 +7,13 @@ const userHelpers = require("../helpers/user-helpers");
 
 
 
+var db=require('../config/connection')
+var collection=require('../config/collections')
+const { search } = require('../routes/user')
+var objectId=require('mongodb').ObjectId
+
+
+
 
 /* GET home page. */
 router.get("/", async (req, res, next)=> {

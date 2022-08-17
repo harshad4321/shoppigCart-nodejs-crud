@@ -1,4 +1,4 @@
-<nav aria-label="breadcrumb">
+{{#if product}}<nav aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="/">Home</a></li>
     <li class="breadcrumb-item active" aria-current="page">
@@ -10,9 +10,28 @@
 <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
   <a href="/" class="col text-center category__link">
     <div class="category__img category__img--large shadow">
-      <img src="/product-images/{{product._id}}.jpg" alt="{{product.Name}}" loading="lazy">
+      <img src="/product-images/{{this.product._id}}.jpg" alt="{{product.Name}}" loading="lazy">
     </div>
     <div class="pt-1">
       {{product.Name}} </div>
   </a>
 </div>
+{{else}}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class=" breadcrumb-item active " aria-current="page" style="color:rgb(255, 0, 0)">
+      {{searchTerm}}!
+    </li>
+  </ol>
+  <div class="masonry-wrapper" style=" text-align:center;">
+    <span class=" a-size-medium a-color-base">No results for
+      <span>
+        <span class="a-size-medium a-color-base">{{searchTerm}}
+          <span>
+  </div>
+  <div class="a-row a-size-base a-color-base" style="text-align:center;">
+    <span>Try checking your spelling or use more general terms
+      <span>
+  </div>
+  {{/if}}

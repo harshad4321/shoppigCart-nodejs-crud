@@ -263,7 +263,7 @@ getUserOrders:(userId)=>{
         console.log('userId',userId);
         let orders=await db.get().collection(collection.ORDER_COLLECTION)
         .find({userId:objectId(userId)}).toArray()
-        console.log('orders263',orders);
+        console.log('orders266',orders);
         resolve(orders); 
     })
  
@@ -368,14 +368,19 @@ resolve(order)
     
   })
 },
-getAllSearchProducts:(regex)=>{
-    return new Promise(async(resolve,reject)=>{
-        let cartItems=await db.get().collection(collection.CART_COLLECTION).findOne('Name')
-           
-        
-          resolve(cartItems)
-      })
-  },
+// getAllSearchProducts:(searchTerm)=>{
+//     return new Promise(async(resolve,reject)=>{
+//         let SearchItem=await db.get().collection(collection.CART_COLLECTION)
+//         .findOne(
+//             {
+//                 "$or":[
+//                 {Name:{$regex:/searchTerm/}}
+//               ]
+//               }
+//         )
+//           resolve(SearchItem)
+//       })
+//   },
 
 
 }
