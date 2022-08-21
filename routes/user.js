@@ -1,20 +1,22 @@
 var express = require("express");
 var router = express.Router();
 const userHelpers = require("../helpers/user-helpers");
-const middleware = require("../middleware");
+const middleware = require("../middleware");  
 const {
    userSignUpValidationRules,
-   validateSignup,
+   validateSignup,  
  } = require("../helpers/validator");
 
  
 // GET: display the signup  
 router.get('/signup',middleware.verifyNotLogin,(req,res)=>{
-   var errorMsg = req.flash("error")[0];
-   res.render('user/signup',{errorMsg,})
 
-   res.render('user/signup',{"SignupErr":req.session.userSignupErr})
-   req.session.userSignupErr=null
+   // checking SignupErr
+      res.render('user/signup',{"SignupErr":req.session.userSignupErr})
+      req.session.userSignupErr=null
+  //  checking errorMsg
+     var errorMsg = req.flash("error")[0];
+     res.render('user/signup',{errorMsg,})
    
 });
 
@@ -28,7 +30,7 @@ router.post(
    (req,res)=>{
        userHelpers.exists(req.body).then((response)=>{
          if(response.status){      
-            req.session.userSignupErr="Email already in use "
+            req.session.userSignupErr="Email already exists"
             res.redirect('/user/signup')
          }else{
              

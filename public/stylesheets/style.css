@@ -106,6 +106,7 @@ header {
   background-color: white;
   color: color(#e8e8de a(0.8));
   letter-spacing: 1.5px;
+  margin-top: 20px;
 }
 
 .search-input:hover,
