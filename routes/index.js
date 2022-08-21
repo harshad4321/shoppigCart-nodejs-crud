@@ -73,17 +73,19 @@ router.post('/remove-product',(req,res)=>{
    
 router.get('/place-order',middleware.verifyLogin,async(req,res)=>{
     let  total=await userHelpers.getTotalAmount(req.session.user._id)
-
     res.render('user/place-order',{total,user:req.session.user})
    
  })
    
 //checking Payment 
 
-router.post('/place-order',async(req,res)=>{
+router.post('/place-order',middleware.verifyLogin,async(req,res)=>{
+ 
     let products=await userHelpers.getCartProductlist(req.body.userId)
+   
     let totalPrice=await userHelpers.getTotalAmount(req.body.userId)
     userHelpers.placeOrder(req.body,products,totalPrice).then((orderId)=>{
+      
        console.log('orderid***>>>:',orderId);
        if(req.body['payment-method']==='COD'){
           res.json({codSuccess:true})

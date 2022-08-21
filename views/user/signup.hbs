@@ -4,6 +4,16 @@
       <h1 class="mt-4 mb-4">Sign Up Page</h1>
       <h3 class="text-center">Create new account</h3>
 
+
+      {{#if SignupErr }}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>{{SignupErr}}!</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      {{/if}}
+
       <!-- Flash message -->
       {{#if errorMsg }}
       <div class="alert alert-warning alert-dismissible fade show" role="alert">

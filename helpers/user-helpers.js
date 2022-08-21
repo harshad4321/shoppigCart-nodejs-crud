@@ -1,11 +1,9 @@
  var db=require('../config/connection')
  var collection=require('../config/collections')
  const bcrypt=require('bcrypt');
-const { response } = require('express');
 var objectId=require('mongodb').ObjectId
 const Razorpay = require('razorpay');
-const { options } = require('../routes/user');
-const { resolve } = require('path');
+
 var instance = new Razorpay({
     key_id: 'rzp_test_Nc7FgdyoVta2ee',
     key_secret: 'u5Yn0DsaZf0QyRxxGFzDtink',
@@ -18,13 +16,30 @@ module.exports={
         userData.confirm_password=await bcrypt.hash(userData.password,10)
                   db.get().collection(collection.USER_COLLECTION).insertOne(userData).then((data)=>{
                     resolve(userData)  
-                 
-                                    
-                });
-                });
-             
-     },
-        
+                   });
+                 });             
+              },
+
+     exists:(userData)=>{
+              return new Promise(async (resolve, reject)=> {
+                let SignupStatus = false
+                let response = {}
+                let user= await db.get().collection(collection.USER_COLLECTION).findOne({ email:userData.email })
+                {
+                if(user){
+                    response.user=user
+                    response.status=true
+                    resolve(response)
+                      }
+                        else {
+                            resolve( {states:false})
+                        }
+                  }
+                })
+                },
+     
+     
+
      doLogin:(userData)=>{
         return new Promise(async (resolve, reject)=> {
             let loginStatus = false
@@ -50,7 +65,6 @@ module.exports={
                     }
                 })
             }else{
-                console.log("login falied because email not there..")
                 resolve({status: false})
             }
         })
@@ -253,10 +267,17 @@ return new Promise((resolve,reject)=>{
 getCartProductlist:(userId)=>{
     return new Promise(async(resolve,reject)=>{
         let cart= await db.get().collection(collection.CART_COLLECTION).findOne({user:objectId(userId)})
+       
+       if(cart){
         resolve(cart.products)
-
+       }
+      else{
+        reject() 
+      }
     })
-
+    .catch((message)=>{
+        console.log('wrong'+message)
+    })
 },
 getUserOrders:(userId)=>{
     return new Promise(async(resolve,reject)=>{
@@ -282,7 +303,6 @@ getOrderProducts:(orderId)=>{
                     item:'$products.item',
                     quantity:'$products.quantity'
             
-
                 }
             },
             {

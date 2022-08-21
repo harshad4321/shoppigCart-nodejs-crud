@@ -15,14 +15,11 @@ middlewareObject.verifyNotLogin=(req,res,next)=>{
 middlewareObject.verifyLogin=(req,res,next)=>{
        console.log("req.session.user....>>>>>",req.session.loggedIn)
        if (req.session.loggedIn){
-        next()
+        return next()
        }else{ 
        res.redirect('/user/login')  
        } 
     }
-
-
-
 
 
 module.exports = middlewareObject;

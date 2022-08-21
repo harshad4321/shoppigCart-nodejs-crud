@@ -12,25 +12,35 @@ const {
 router.get('/signup',middleware.verifyNotLogin,(req,res)=>{
    var errorMsg = req.flash("error")[0];
    res.render('user/signup',{errorMsg,})
+
+   res.render('user/signup',{"SignupErr":req.session.userSignupErr})
+   req.session.userSignupErr=null
+   
 });
 
 // POST: handle the signup logic
 router.post(
    '/signup',
    [
-      
       userSignUpValidationRules(),
       validateSignup,
    ],
    (req,res)=>{
-    userHelpers.doSignup(req.body).then((response)=>{
-      console.log(">>>>>>>>>>>>>",response); 
-      req.session.loggedIn = true
-      req.session.user=response
-      res.redirect('/')
-   
+       userHelpers.exists(req.body).then((response)=>{
+         if(response.status){      
+            req.session.userSignupErr="Email already in use "
+            res.redirect('/user/signup')
+         }else{
+             
+       userHelpers.doSignup(req.body).then((response)=>{
+         console.log(">>>>>>>>>>>>>",response); 
+         req.session.loggedIn = true
+         req.session.user=response
+         res.redirect('/')
    })
+}
 });
+})
 
 
 // GET: display the login form
