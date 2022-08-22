@@ -113,7 +113,6 @@ router.post('/place-order',middleware.verifyLogin,async(req,res)=>{
     })
     router.get('/view-order-products/:id',async(req,res)=>{  
        let products=await userHelpers.getOrderProducts(req.params.id)  
-       console.log('0000000000000000000----->>>>>>>>>',req.params.id) 
         res.render('user/view-order-products',{user:req.session.user,products})   
     }) 
 
