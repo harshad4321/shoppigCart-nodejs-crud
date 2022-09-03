@@ -90,6 +90,66 @@ req.session.loggedIn=false
    res.redirect('/')
 })
 
+
+
+// ------------------user profile-------------------------
+
+router.get("/my-profile",middleware.verifyLogin, async (req, res) => {
+   try{
+     res.render("user/user-profile", {
+       user: req.session.user, cartCount, user_head: true
+     });
+   }catch (error) {
+     console.log(error);
+   }
+ });
+ 
+ router.get('/edit-profile',middleware.verifyLogin,async (req, res) => {
+   try{
+      console.log('haiiiiiii')
+     res.render('user/edit-profile', {
+       user: req.session.user, user_head: true, cartCount
+     });
+   }catch (error) {
+     console.log(error);
+   }
+ })
+ 
+ router.post("/edit-profile/:id",middleware.verifyLogin,(req, res) => {
+   console.log('haiiiiiii<<<<<',req.params.id,req.body)
+   try{
+     userHelpers.editUserProfile(req.params.id,req.body).then(() => {
+       res.redirect("/");
+     })
+   }catch (error) {
+      res.redirect("/");
+    
+   }
+ });
+ 
+ router.get('/change-password',middleware.verifyLogin, async (req, res) => {
+   try{
+     res.render('user/change-password', {
+       user: req.session.user, user_head: true, cartCount
+     })
+   }catch (error) {
+     console.log(error);
+   }
+ })
+ 
+ router.post('/change-password',middleware.verifyLogin, async (req, res) =>{
+   try{
+      console.log('req.body, req.session.user._id>>>>>>>.',req.body, req.session.user._id)
+     userHelpers.changePassword(req.body, req.session.user._id).then((response) => {
+       res.redirect('/')
+     })
+   }catch(error){
+     console.log(error);
+   }
+ })
+ 
+
+
 module.exports = router;      
 
   

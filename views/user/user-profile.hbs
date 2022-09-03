@@ -1,0 +1,227 @@
+<style>
+    .profile-pic {
+        width: 200px;
+        max-height: 200px;
+        display: inline-block;
+    }
+
+    .file-upload {
+        display: none;
+    }
+
+    .circle {
+        border-radius: 100% !important;
+        overflow: hidden;
+        width: 128px;
+        height: 128px;
+        border: 2px solid rgb(10 9 9 / 20%);
+        top: 72px;
+        margin-left: 120px;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .p-image {
+        margin-left: 212px;
+        margin-top: -19px;
+        top: 173px;
+        right: 108px;
+        color: #666666;
+        transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+    }
+
+    .p-image:hover {
+        transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+    }
+
+    .upload-button {
+        font-size: 1.2em;
+    }
+
+    .upload-button:hover {
+        transition: all .3s cubic-bezier(.175, .885, .32, 1.275);
+        color: #999;
+    }
+</style>
+
+<script>
+//    $(document).ready(function () {
+//
+//
+//        var readURL = function (input) {
+//            if (input.files && input.files[0]) {
+//                var reader = new FileReader();
+//
+//                reader.onload = function (e) {
+//                    $('.profile-pic').attr('src', e.target.result);
+//                }
+//
+//                reader.readAsDataURL(input.files[0]);
+//            }
+//        }
+//
+//
+//        $(".file-upload").on('change', function () {
+//            readURL(this);
+//        });
+//
+//        $(".upload-button").on('click', function () {
+//            $(".file-upload").click();
+//        });
+//    });
+//</script>
+
+<div class="product-container">
+    <div class="container">
+        <div class="product-box col-md-12">
+            <div class="product-main">
+                <h2 class="title">My Profile</h2>
+                <section style="background-color: #eee;">
+                    <div class="container-fluid py-5">
+                        <form id="" name="">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="card mb-4">
+                                        <div class="row my-3">
+                                            <div class="small-12 medium-2 large-2 columns">
+                                                <div class="circle">
+                                                    <img class="profile-pic"
+                                                        src="https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg">
+                                                </div>
+                                                {{!-- <div class="p-image">
+                                                    <i class="fa fa-camera upload-button"></i>
+                                                    <input name="profilePic" class="file-upload" type="file"
+                                                        accept="image/*" />
+                                                </div> --}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card mb-4 mb-lg-0">
+                                        <div class="card-body p-0">
+                                            <ul class="list-group list-group-flush rounded-3">
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                                    <a href="/user/orders">
+                                                        <p class="mb-0">My Orders</p>
+                                                    </a>
+                                                </li>
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                                    <a href="">
+                                                        <p class="mb-0">My Whishlist</p>
+                                                    </a>
+                                                </li>
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                                    <a href="/user/change-password">
+                                                        <p class="mb-0">Change Password</p>
+                                                    </a>
+                                                </li>
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                                    <a href="">
+                                                        <p class="mb-0">My Cart</p>
+                                                    </a>
+                                                </li>
+                                                <li
+                                                    class="list-group-item d-flex justify-content-between align-items-center p-3">
+                                                    <a href="/user/logout">
+                                                        <p class="mb-0">Logout</p>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-8">
+                                    <div class="card mb-4">
+                                        <div class="card-body">
+                                            <!--Section: Contact v.2-->
+                                            <section class="mb-4">
+                                                <div class="row">
+                                                    <!--Grid column-->
+                                                    <div class="col-md-12 mb-md-0 mb-5">
+
+                                                        <!--Grid row-->
+                                                        <div class="row">
+
+                                                            <!--Grid column-->
+                                                            <div class="col-md-6">
+                                                                <div class="md-form mb-0">
+                                                                    <input type="text" id="profileFirstName"
+                                                                        name="profileFirstName" class="form-control"
+                                                                        value="{{user.name}}" readonly>
+                                                                    <label for="name" class=""></label>
+                                                                </div>
+                                                            </div>
+                                                            <!--Grid column-->
+
+                                                            <!--Grid column-->
+
+                                                        </div>
+                                                        <!--Grid row-->
+
+                                                        <!--Grid row-->
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="md-form mb-0">
+                                                                    <input type="text" id="profileEmail"
+                                                                        name="profileEmail" class="form-control"
+                                                                        value="{{user.email}}" readonly><label
+                                                                        for="name" class=""></label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!--Grid row-->
+
+                                                        <!--Grid row-->
+                                                        {{!-- <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="md-form mb-0">
+                                                                    <input type="text" id="profilePhone"
+                                                                        name="profilePhone" class="form-control" {{!--
+                                                                        value="{{user.phoneNumber}}" readonly><label
+                                                                        for="name" class=""></label>
+                                                                </div>
+                                                            </div>
+                                                        </div> --}} --}}
+                                                        <!--Grid row-->
+
+                                                        <!--Grid column-->
+                                                        {{!-- <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="md-form">
+                                                                    <textarea type="text" id="profileAddress"
+                                                                        name="profileAddress" rows="2"
+                                                                        class="form-control md-textarea"
+                                                                        readonly>Address</textarea><label for="name"
+                                                                        class=""></label>
+                                                                </div>
+                                                            </div>
+                                                        </div> --}}
+                                                        <!--Grid row-->
+                                                        <div class="text-center text-md-left">
+                                                            <a href="/user/edit-profile">
+                                                                <button type="button"
+                                                                    class="btn btn-primary">Edit</button>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="status"></div>
+                                                </div>
+                                                <!--Grid column-->
+                                            </section>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>

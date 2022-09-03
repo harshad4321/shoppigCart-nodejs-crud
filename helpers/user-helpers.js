@@ -389,4 +389,60 @@ resolve(order)
   })
 },
 
+
+// --------------user profile functions ----------------------
+
+editUserProfile: (proId, userDetails) => {
+    return new Promise(async (resolve, reject) => {
+        let user = await db.get().collection(collection.USER_COLLECTION).findOne({ _id: objectId(proId) })
+        let userExit = await db.get().collection(collection.USER_COLLECTION).findOne({ email: userDetails.email })
+        let response = {}
+        if (user.email == userDetails.email) {
+            db.get().collection(collection.USER_COLLECTION).updateOne({ _id: objectId(proId) }, {
+                $set: {
+                    name: userDetails.Name,
+                    email: userDetails.email,
+                }
+            }).then((response) => {
+                resolve(response)
+            })
+        } else if (userExit) {
+            response.err = true
+            resolve(response)
+
+        } else {
+            db.get().collection(collection.USER_COLLECTION).updateOne({ _id: objectId(proId) }, {
+                $set: {
+                    name: userDetails.Name,
+                    email: userDetails.email,
+                 }
+            }).then((response) => {
+                resolve(response)
+            })
+        }
+    })
+},
+
+changePassword: (userData, userId) => {
+    return new Promise(async (resolve, reject) => {
+        userData.newPassword = await bcrypt.hash(userData.newPassword, 10)
+        db.get().collection(collection.USER_COLLECTION).updateOne({ _id: objectId(userId) }, {
+
+            $set: {
+
+                password: userData.newPassword
+
+            }
+        }).then((data) => {
+            console.log(userData);
+            console.log("success");
+            resolve(userData)
+        })
+    })
 }
+
+}
+
+
+
+
