@@ -357,4 +357,5 @@ element.style {
 
 body {
   margin-bottom: 135px;
+  behavior: 'smooth'
 }

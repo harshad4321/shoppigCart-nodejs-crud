@@ -2,16 +2,58 @@ const { response } = require("express");
 var express = require("express");
 const productHelpers = require("../helpers/product-helpers");
 var router = express.Router();
-var productHelper = require("../helpers/product-helpers");
+var adminHelpers = require('../helpers/admin-helpers')
+
+const verifyLogin = (req, res, next) => {
+  if (req.session.adminLogin) {
+    next();
+  } else {
+    res.render('admin/admin-login', { adminErr: req.session.adminLoginErr})
+    req.session.adminLoginErr = false;
+  }
+}
+
+
+
+router.post('/admin-login', (req,res) => {
+  try{
+    adminHelpers.doAdminLogin(req.body).then((response) => {
+      if (response.status) {
+        req.session.adminLogin = true;
+        req.session.admin = response.admin;
+        res.redirect('/admin')
+      } else {
+        req.session.adminLoginErr = "Incorrect username or password ";
+        res.redirect('/admin')
+      }
+    })
+  }catch (error) {
+    console.log(error);
+  }
+})
+
+router.get('/logout', (req, res) => {
+  try{
+    req.session.admin = null;
+    req.session.adminLogin = null;
+    // req.session.destroy();
+    res.redirect('/admin')
+  }catch (error) {
+    console.log(error);
+  }
+})
+
+
+
 
 /* GET users listing. */
-router.get("/", function (req, res, next) {
+router.get("/", verifyLogin, (req, res, next)=> {
   productHelpers.getAllProducts().then((products) => {
     console.log(products);
     res.render("admin/view-products", { admin: true, products });
   });
 });
-router.get("/add-product", function (req, res) {
+router.get("/add-product", verifyLogin,(req, res)=> {
   res.render("admin/add-product");
 });
 
@@ -56,5 +98,7 @@ router.post('/edit-product/:id',(req,res)=>{
     }
  
   })
-}) 
+})
+
+
 module.exports = router;

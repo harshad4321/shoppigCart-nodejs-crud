@@ -1,6 +1,7 @@
  var db=require('../config/connection')
  var collection=require('../config/collections')
  var objectId=require('mongodb').ObjectId
+
  module.exports={
      addProduct:(product,callback)=>{
     db.get().collection('product').insertOne(product).then((data)=>{
@@ -47,6 +48,22 @@
       }) 
     })
 },
-
+// doSignup:(adminData)=>{
+//   return new Promise(async (resolve, reject)=> {
+//     let SignupStatus = false
+//     let response = {}
+//     let admin= await db.get().collection(collection.ADMIN_COLLECTION).findOne({ email:adminData.email })
+//     {
+//     if(admin){
+//         response.admin=admin
+//         response.status=true
+//         resolve(response)
+//           }
+//             else {
+//                 resolve( {states:false})
+//             }
+//       }
+//     })
+//     },
 
 }

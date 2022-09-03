@@ -39,7 +39,6 @@ res.render('user/cart',{products,user,totalValue,user});
  
 })
 
-
    
 // GET: add a product to the shopping cart when "Add to cart" button is pressed
 

@@ -81,7 +81,7 @@ module.exports={
            let userCart=await db.get().collection(collection.CART_COLLECTION).findOne({user:objectId(userId)})
            if(userCart){
                let proExist=userCart.products.findIndex(product=> product.item==proId)
-console.log('proExist',proExist);
+console.log('proExist>>>>>>>.',proExist);
 if(proExist!=-1){
     db.get().collection(collection.CART_COLLECTION)
     .updateOne({user:objectId(userId),'products.item':objectId(proId)},
@@ -167,7 +167,7 @@ if(proExist!=-1){
 console.log('details.count',details.count)
 console.log('details.quantity',details.quantity)
       return new Promise((resolve,reject)=>{
-          if(details.count==-1 && details.quantity==1){
+          if(details.count == -1 && details.quantity == 1){
             db.get().collection(collection.CART_COLLECTION)
             .updateOne({_id:objectId(details.cart)}, 
         {

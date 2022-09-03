@@ -1,4 +1,5 @@
 <section>
+    {{#if orders}}
     <style="background-color: hsla(0, 0%, 100%, 0.9) !importantimportant; backdrop-filter: saturate(200%) blur(25px)">
         </style>
         <div class="container   bg-glass">
@@ -44,8 +45,10 @@
 
             </a>
         </div>
-
         </div>
+        {{else}}
+        <h2>You have not ordered a single product </h2>
+        {{/if}}
 </section>
 <script>
     function changeQuandity(cartId, proId, userId, count) {
@@ -72,5 +75,6 @@
                 }
             }
         })
-    } 
+    }
+
 </script>

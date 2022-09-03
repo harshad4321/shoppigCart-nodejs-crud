@@ -1,3 +1,4 @@
+require("dotenv").config();
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -11,15 +12,17 @@ var indexRouter  = require("./routes/index");
 
 const flash = require("connect-flash");
 var hbs = require('express-handlebars')
+const HBS = hbs.create({});
 var fileUpload = require('express-fileupload')
 var db=require('./config/connection')
+var Handlebars = require('handlebars');
  var session = require('express-session')
+
  var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs'); 
-
 app.engine('hbs',hbs.engine({extname:'hbs',defaultLayout:'layout',layoutsDir:__dirname+'/views/layout/',partialsDir:__dirname+'/views/partials/'}));
 
 app.use(logger('dev'));
@@ -38,13 +41,30 @@ app.use(
    cookie: { maxAge: 60 * 1000 * 60 * 3 },
     }),
     );
+    Handlebars.registerHelper("inc", function(value, options)
+    {
+        return parseInt(value) + 1;
+    });
+    HBS.handlebars.registerHelper("ifCondition",function(v1,v2,options){
+      if(v1==v2){
+        return options.fn(this)
+      }
+      return options.inverse(this) 
+    })
+
+    HBS.handlebars.registerHelper("notEquals",function(v1,v2,options){
+      if(v1!=v2){
+        return options.fn(this)
+      }
+      return options.inverse(this) 
+    })
+    
+
+
  db.connect((err)=>{ 
       if(err) console.log('connection ERROR'+err);
       else console.log("Database is connected to port 27017");
         });
-
-
-
 
 
 
