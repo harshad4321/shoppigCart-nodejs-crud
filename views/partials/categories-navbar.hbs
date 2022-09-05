@@ -4,8 +4,7 @@
       {{#if user}}
       Welcome
       {{user.name}}
-      {{else}}
-      Account
+
       {{/if}}</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,14 +17,18 @@
             <span class="sr-only">(current)</span></a>
         </li>
 
+
         {{#if user}}
         <li class="nav-item">
-          <a class="nav-link" href="/cart">cart <span class="badge badge-success"
+          <a class="nav-link" href="/cart">cart <i class=" fa fa-shopping-cart"></i> <span class="badge badge-success"
               id="cart-count">{{cartCount}}</span></a>
         </li>
-        {{else}}
-        <li class="nav-item">
-          <a class="nav-link" href="/user/signup">cart <span class="badge badge-success" id="cart-count">0</span></a>
+
+
+        {{else}} <li class="nav-item">
+          <a class="nav-link" href="/user/signup">cart <i class=" fa fa-shopping-cart"></i> <span
+              class="badge badge-success" id="cart-count">0</span></a>
+
         </li>
         {{/if}}
         {{#if user}}
@@ -33,16 +36,21 @@
           <a class="nav-link" href="/orders">Orders</a>
         </li>
         {{/if}}
+
         </li>
         <li class="nav-item mr-4">
           <a class="nav-link disabled" href="/">Disabled</a>
         </li>
+
+
+
       </ul>
       <form class="form-inline my-2 my-lg-0">
         <div class="dropdown">
           <button class="btn btn-secondary dropdown-toggle btn btn-outline-success mr-4"
-            class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
+            <i class='fas fa-user-alt' style='font-size:24px'></i>
             {{#if user}}
             Welcome
             {{user.name}}
