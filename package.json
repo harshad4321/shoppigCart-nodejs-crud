@@ -2,8 +2,11 @@
   "name": "shopping-cart",
   "version": "0.0.0",
   "private": true,
+  "engines": {
+    "node": "v16.14.2"
+  },
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
