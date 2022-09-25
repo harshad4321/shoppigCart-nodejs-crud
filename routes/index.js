@@ -16,6 +16,7 @@ router.get("/" , async(req, res, next)=> {
     }
     productHelpers.getAllProducts().then((products)=>{
       console.log('products',products)
+      console.log('kkkkkkkkkkkkkkkkkkkkkkkkkkkkk>>>',user)
      res.render('user/view-product',{  products,user,cartCount})   
       });
    });
@@ -141,8 +142,9 @@ router.post('/place-order',middleware.verifyLogin,async(req,res)=>{
     cartCount=await userHelpers.getCartCount(req.session.user._id)
    }
      let product=await productHelpers.getProductDetails(req.params.id)
+     console.log('sssssssssssssssssssssssssss>>',user)
      res.render('user/over-view-product',{product,user,cartCount})
-  } catch (error) {
+  } catch (error) { 
      res.status(500).send({message: error.message || "Error Occured" });
    }
    }) 

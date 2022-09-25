@@ -52,23 +52,15 @@
                       <ion-icon name="star-outline"></ion-icon>
                       <ion-icon name="star-outline"></ion-icon>
                     </div>
-
                     <p class="card-title">₹ {{this.Price}}</p>
-
               </a>
-              {{#if user}}
+
               <button onclick="addToCart('{{this._id}}')" class=" btn btn-primary"> Add to Shopping Cart</button>
-              {{else}}
-              <a class=" btn btn-primary" href="/user/signup"> Add to Shopping
-                Cart</a>
-              {{/if}}
 
             </div>
           </div>
         </div>
         {{/each}}
-
-
       </div>
     </div>
     </div>
