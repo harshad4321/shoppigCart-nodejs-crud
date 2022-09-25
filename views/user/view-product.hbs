@@ -56,11 +56,18 @@
                     <p class="card-title">₹ {{this.Price}}</p>
 
               </a>
+              {{#if user}}
               <button onclick="addToCart('{{this._id}}')" class=" btn btn-primary"> Add to Shopping Cart</button>
+              {{else}}
+              <a class=" btn btn-primary" href="/user/signup"> Add to Shopping
+                Cart</a>
+              {{/if}}
+
             </div>
           </div>
         </div>
         {{/each}}
+
 
       </div>
     </div>
@@ -68,7 +75,7 @@
     </div>
     </div>
   </section>
-  <!-- Footer -->
+  <!--Footer -->
   <section class="bottom-footer">
     <div class="row">
       <div class="col-12 mr-auto">

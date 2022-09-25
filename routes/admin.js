@@ -85,18 +85,19 @@ router.get('/edit-product/:id',async(req,res)=>{
   let product=await productHelpers.getProductDetails(req.params.id)
   console.log(product);
   res.render('admin/edit-product',{product})
-})
+}) 
 router.post('/edit-product/:id',(req,res)=>{ 
-  console.log(req.params.id);
-  let id =req.params.id
-  productHelpers.updatePreoduct(req.params.id,req.body).then(()=>{
+  let id=req.params.id  // image id 
+  productHelpers.updateProduct(req.params.id,req.body).then(()=>{
     res.redirect('/admin')
-    if (req.files && req.files.image){ 
+    if (req.files && req.files.Image){ 
       const imageName = id.jpg ; 
       let image=req.files.Image
       image.mv('./public/product-images/'+id+'.jpg')
     }
- 
+    else{
+      console.log(' image is not')
+    }
   })
 })
 

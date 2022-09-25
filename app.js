@@ -65,7 +65,7 @@ app.use(
 
  db.connect((err)=>{ 
       if(err) console.log('connection ERROR'+err);
-      else console.log("Database is connected to port 27017");
+      else console.log("Database is connected to port ");
         });
 
 

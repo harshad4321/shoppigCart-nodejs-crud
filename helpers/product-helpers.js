@@ -32,7 +32,7 @@
       })
     })
   },
-  updatePreoduct:(proId,proDetails)=>{
+  updateProduct:(proId,proDetails)=>{
     return new Promise((resolve,reject)=>{
       db.get().collection(collection.PRODUCT_COLLECTION)
        .updateOne({_id:objectId(proId)},{

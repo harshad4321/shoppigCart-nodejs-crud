@@ -125,10 +125,14 @@
             <p><strong>Brand: </strong>
                 {{this.product.Brand}}
             </p>
-
-
+            {{#if user}}
             <button onclick="addToCart('{{this.product._id}}')" class=" btn btn-primary"> Add to Shopping
                 Cart</button>
+            {{else}}
+            <a class=" btn btn-primary" href="/user/signup"> Add to Shopping
+                Cart</a>
+            {{/if}}
+
 
         </div>
     </div>

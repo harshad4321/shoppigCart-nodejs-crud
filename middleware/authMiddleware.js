@@ -19,6 +19,7 @@ const token = req.cookies.jwt;
 
   if (!token) {
     res.status(401)
+    res.redirect('/user/signup')  
     throw new Error('Not Authorized, No Token.')
   }
 // })

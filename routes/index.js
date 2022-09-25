@@ -43,8 +43,9 @@ res.render('user/cart',{products,user,totalValue,});
    
 // GET: add a product to the shopping cart when "Add to cart" button is pressed
 
-router.get('/add-to-cart/:id',(req,res)=>{
+router.get('/add-to-cart/:id',middleware.verifyLogin,(req,res)=>{
     
+
     userHelpers.addToCart(req.params.id,req.session.user._id).then(()=>{
       
        res.json({status:true})
