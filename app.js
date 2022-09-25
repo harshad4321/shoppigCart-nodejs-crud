@@ -1,14 +1,14 @@
 require("dotenv").config();
 var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+var express     = require('express');
+var path        = require('path');
+var cookieParser= require('cookie-parser');
+var logger      = require('morgan');
 
-const productsRouter = require("./routes/products");
-var userRouter = require('./routes/user');
-var adminRouter = require('./routes/admin');
-var indexRouter  = require("./routes/index");
+const productsRouter= require("./routes/products");
+var userRouter      = require('./routes/user');
+var adminRouter     = require('./routes/admin');
+var indexRouter     = require("./routes/index");
 
 const flash = require("connect-flash");
 var hbs = require('express-handlebars')
@@ -19,6 +19,8 @@ var Handlebars = require('handlebars');
  var session = require('express-session')
 
  var app = express();
+ 
+ app.use(express.json({ limit: '50mb' }))
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

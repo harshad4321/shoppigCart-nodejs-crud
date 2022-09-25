@@ -15,7 +15,8 @@
       {{/if}}
 
       <!-- Flash message -->
-      {{#if errorMsg }}
+
+      {{#if errorMsg}}
       <div class="alert alert-warning alert-dismissible fade show" role="alert">
         <strong>{{errorMsg}}!</strong>
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -23,6 +24,8 @@
         </button>
       </div>
       {{/if}}
+
+
 
       <form action="/user/signup" method="POST">
         <div class="form-group">

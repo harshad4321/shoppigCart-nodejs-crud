@@ -89,7 +89,7 @@ router.get('/edit-product/:id',async(req,res)=>{
 router.post('/edit-product/:id',(req,res)=>{ 
   console.log(req.params.id);
   let id =req.params.id
-  productHelper.updatePreoduct(req.params.id,req.body).then(()=>{
+  productHelpers.updatePreoduct(req.params.id,req.body).then(()=>{
     res.redirect('/admin')
     if (req.files && req.files.image){ 
       const imageName = id.jpg ; 

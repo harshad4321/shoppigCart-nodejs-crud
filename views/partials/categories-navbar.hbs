@@ -4,8 +4,8 @@
       {{#if user}}
       Welcome
       {{user.name}}
-
-      {{/if}}</a>
+      {{/if}}
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -62,6 +62,7 @@
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             {{#if user}}
             <a class="dropdown-item" href="/user/logout">Logout</a>
+            <a class="dropdown-item" href="/user/my-profile">Profile</a>
             {{else}}
             <a class="dropdown-item" href="/user/login">Login</a>
             <a class="dropdown-item" href="/user/signup">signup</a>

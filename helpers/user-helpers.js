@@ -1,8 +1,10 @@
  var db=require('../config/connection')
  var collection=require('../config/collections')
  const bcrypt=require('bcrypt');
+
 var objectId=require('mongodb').ObjectId
 const Razorpay = require('razorpay');
+
 
 var instance = new Razorpay({
     key_id: 'rzp_test_Nc7FgdyoVta2ee',
@@ -17,7 +19,7 @@ module.exports={
                   db.get().collection(collection.USER_COLLECTION).insertOne(userData).then((data)=>{
                     resolve(userData)  
                    });
-                 });             
+                 });          
               },
 
      exists:(userData)=>{
@@ -30,6 +32,7 @@ module.exports={
                     response.user=user
                     response.status=true
                     resolve(response)
+                 
                       }
                         else {
                             resolve( {states:false})
@@ -37,8 +40,6 @@ module.exports={
                   }
                 })
                 },
-     
-     
 
      doLogin:(userData)=>{
         return new Promise(async (resolve, reject)=> {
@@ -221,14 +222,30 @@ console.log('details.quantity',details.quantity)
                 } 
             },
             {
-                $group:{ 
-                    _id:null, 
-                    total:{$sum:{$multiply:[{ $toInt: '$quantity'},{ $toInt: '$product.Price' }]}}
+                $group: {
+                  _id: null,
+                  total: {
+                    $sum: {
+                      $multiply: [
+                        {
+                             $toInt: '$quantity'
+                        },
+                        {
+                          $toInt: {
+                            "$replaceAll": {
+                              "input": "$product.Price",
+                              "find": ",",
+                              "replacement": ""
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
                 }
-            }
- 
+              }
         ]).toArray()
-       
+        
         resolve(total.length > 0 ? total[0].total: 0)
     })
 } ,

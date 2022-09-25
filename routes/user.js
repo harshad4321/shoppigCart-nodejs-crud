@@ -1,24 +1,29 @@
 var express = require("express");
 var router = express.Router();
-const userHelpers = require("../helpers/user-helpers");
-const middleware = require("../middleware");  
+const userHelpers   = require("../helpers/user-helpers");
+const middleware    = require("../middleware");
+const generateToken = require('../utils/generateToken')
+
+
+
 const {
    userSignUpValidationRules,
    validateSignup,  
  } = require("../helpers/validator");
 
- 
-// GET: display the signup  
-router.get('/signup',middleware.verifyNotLogin,(req,res)=>{
 
+// GET: display the signup  
+router.get('/signup',middleware.verifyNotLogin,
+    async(req,res)=>{
    // checking SignupErr
       res.render('user/signup',{"SignupErr":req.session.userSignupErr})
       req.session.userSignupErr=null
-  //  checking errorMsg
-     var errorMsg = req.flash("error")[0];
-     res.render('user/signup',{errorMsg,})
-   
+  //  checking errorMsg 
+    var errorMsg = req.flash("error")[0];
+      res.render('user/signup',{errorMsg})
 });
+
+
 
 // POST: handle the signup logic
 router.post(
@@ -26,18 +31,22 @@ router.post(
    [
       userSignUpValidationRules(),
       validateSignup,
+      
    ],
-   (req,res)=>{
+    (req,res)=>{
        userHelpers.exists(req.body).then((response)=>{
          if(response.status){      
             req.session.userSignupErr="Email already exists"
             res.redirect('/user/signup')
          }else{
-             
-       userHelpers.doSignup(req.body).then((response)=>{
-         console.log(">>>>>>>>>>>>>",response); 
+       userHelpers.doSignup(req.body).then ((response)=>{
+         console.log(">>>>42 responce>>>>>>>>>",response); 
          req.session.loggedIn = true
          req.session.user=response
+         let user=req.session.user._id;
+         const token = generateToken({user});
+         console.log({token:token})
+          res.cookie('jwt', token,{httpOnly:true});
          res.redirect('/')
    })
 }
@@ -68,7 +77,11 @@ router.post(
          if(response.status){
             req.session.loggedIn=true,
             console.log('req.session.loggedIn>><<<',req.session.loggedIn)
-            req.session.user=response.user       
+            req.session.user=response.user  
+            let user=req.session.user._id;
+            const token = generateToken({user});
+            console.log({token:token})
+             res.cookie('jwt', token,{httpOnly:true});     
             res.redirect('/')
          }else{
              req.session.userLoginErr="Invalid Email or password, try again!"
@@ -85,6 +98,7 @@ router.post(
  router.get('/logout',middleware.verifyLogin,(req,res)=>{
    req.session.user=null 
    // req.session.user=false
+    res.clearCookie('jwt')
 req.session.loggedIn=false
    console.log('  req.session.user>>><<<',req.session.user)
    res.redirect('/')
@@ -106,7 +120,7 @@ router.get("/my-profile",middleware.verifyLogin, async (req, res) => {
  
  router.get('/edit-profile',middleware.verifyLogin,async (req, res) => {
    try{
-      console.log('haiiiiiii')
+  
      res.render('user/edit-profile', {
        user: req.session.user, user_head: true, cartCount
      });
@@ -116,7 +130,7 @@ router.get("/my-profile",middleware.verifyLogin, async (req, res) => {
  })
  
  router.post("/edit-profile/:id",middleware.verifyLogin,(req, res) => {
-   console.log('haiiiiiii<<<<<',req.params.id,req.body)
+   
    try{
      userHelpers.editUserProfile(req.params.id,req.body).then(() => {
        res.redirect("/");
@@ -148,7 +162,7 @@ router.get("/my-profile",middleware.verifyLogin, async (req, res) => {
    }
  })
  
-
+ 
 
 module.exports = router;      
 

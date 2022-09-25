@@ -3,18 +3,17 @@ const middleware = require("../middleware");
 const productHelpers = require('../helpers/product-helpers');
 var router = express.Router();
 const userHelpers = require("../helpers/user-helpers");
-
+const protect = require ('../middleware/authMiddleware')
 
 
 /* GET home page. */
-router.get("/", async (req, res, next)=> {
+router.get("/" , async(req, res, next)=> {
     let user = req.session.user
     console.log('>>>>>user>>',user);
     let cartCount=null
     if(req.session.user){
      cartCount=await userHelpers.getCartCount(req.session.user._id)
     }
-   
     productHelpers.getAllProducts().then((products)=>{
       console.log('products',products)
      res.render('user/view-product',{  products,user,cartCount})   
@@ -25,17 +24,19 @@ router.get("/", async (req, res, next)=> {
    
 // GET: view shopping cart contents
 router.get('/cart',middleware.verifyLogin,async(req,res,next)=>{
+
    let products =await userHelpers.getCartProducts(req.session.user._id)
   let totalValue=0 
   if(products.length>0){   
   totalValue=await userHelpers.getTotalAmount(req.session.user._id)
   let proId=req.params.id
-  console.log(proId);
-  }
+  console.log('proId>>>>>>>>>>',proId);
   next
+  }
+console.log('products>',products)
   let user=req.session.user._id;
   console.log("user...",user);
-res.render('user/cart',{products,user,totalValue,user});
+res.render('user/cart',{products,user,totalValue,});
  
 })
 
@@ -105,7 +106,7 @@ router.post('/place-order',middleware.verifyLogin,async(req,res)=>{
 
 
 
- router.get('/orders',async(req,res)=>{ 
+ router.get('/orders',protect,async(req,res)=>{ 
     let orders=await userHelpers.getUserOrders(req.session.user._id) 
     
      res.render('user/orders',{user:req.session.user,orders})    
@@ -115,7 +116,7 @@ router.post('/place-order',middleware.verifyLogin,async(req,res)=>{
         res.render('user/view-order-products',{user:req.session.user,products})   
     }) 
 
-    router.post('/verify-payment',(req,res)=>{
+    router.post('/verify-payment',protect,(req,res)=>{
     console.log(req.body); 
     userHelpers.verifyPayment(req.body).then(()=>{
        userHelpers.changePaymentStatus(req.body[  'order[receipt]']).then(()=>{

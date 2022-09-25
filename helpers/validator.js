@@ -18,7 +18,8 @@ const userSignUpValidationRules = () => {
       .withMessage('Passwords must match.')
     .custom((value,{req})=>{
       if(value !==req.body.password)
-      {  // trow error if passwords do not match
+      { 
+       // trow error if passwords do not match
         throw new Error("Passwords don't match,please enter correct password");
       }else {
         return value;
@@ -27,8 +28,6 @@ const userSignUpValidationRules = () => {
   ];
 };
 
-
-
 const validateSignup = (req, res, next) => {
 
   const errors = validationResult(req);
@@ -36,9 +35,11 @@ const validateSignup = (req, res, next) => {
     var messages = [];
     errors.array().forEach((error) => {
       messages.push(error.msg);
+    
     })
     req.flash("error", messages);
     return res.redirect("/user/signup");
+   
   }
   next();
 };
