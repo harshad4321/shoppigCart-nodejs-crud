@@ -71,7 +71,7 @@ router.post('/remove-product',(req,res)=>{
     })
  }) 
    
-router.get('/place-order',middleware.verifyLogin,async(req,res)=>{
+router.get('/place-order',protect,middleware.verifyLogin,async(req,res)=>{
     let  total=await userHelpers.getTotalAmount(req.session.user._id)
     res.render('user/place-order',{total,user:req.session.user})
    
@@ -140,7 +140,6 @@ router.post('/place-order',middleware.verifyLogin,async(req,res)=>{
     cartCount=await userHelpers.getCartCount(req.session.user._id)
    }
      let product=await productHelpers.getProductDetails(req.params.id)
-     console.log('sssssssssssssssssssssssssss>>',user)
      res.render('user/over-view-product',{product,user,cartCount})
   } catch (error) { 
      res.status(500).send({message: error.message || "Error Occured" });

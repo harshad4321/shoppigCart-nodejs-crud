@@ -2,6 +2,7 @@ require("dotenv").config();
 var createError = require('http-errors');
 var express     = require('express');
 var path        = require('path');
+const colors = require('colors');
 var cookieParser= require('cookie-parser');
 var logger      = require('morgan');
 
@@ -64,8 +65,8 @@ app.use(
 
 
  db.connect((err)=>{ 
-      if(err) console.log('connection ERROR'+err);
-      else console.log("Database is connected to port ");
+      if(err) console.log('connection ERROR'+err.red.underline.bold);
+      else console.log(`Database is connected to port`.yellow.bold );
         });
 
 
