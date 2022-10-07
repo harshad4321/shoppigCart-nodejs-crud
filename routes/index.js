@@ -4,7 +4,7 @@ const productHelpers = require('../helpers/product-helpers');
 var router = express.Router();
 const userHelpers = require("../helpers/user-helpers");
 const protect = require ('../middleware/authMiddleware')
-
+ 
 
 /* GET home page. */
 router.get("/" , async(req, res, next)=> {
@@ -15,8 +15,7 @@ router.get("/" , async(req, res, next)=> {
      cartCount=await userHelpers.getCartCount(req.session.user._id)
     }
     productHelpers.getAllProducts().then((products)=>{
-      console.log('products',products)
-      console.log('kkkkkkkkkkkkkkkkkkkkkkkkkkkkk>>>',user)
+      console.log('products>>>>>>>>>>>>>>>>',products)
      res.render('user/view-product',{  products,user,cartCount})   
       });
    });
@@ -34,7 +33,7 @@ router.get('/cart',middleware.verifyLogin,async(req,res,next)=>{
   console.log('proId>>>>>>>>>>',proId);
   next
   }
-console.log('products>',products)
+
   let user=req.session.user._id;
   console.log("user...",user);
 res.render('user/cart',{products,user,totalValue,});
@@ -46,7 +45,6 @@ res.render('user/cart',{products,user,totalValue,});
 
 router.get('/add-to-cart/:id',middleware.verifyLogin,(req,res)=>{
     
-
     userHelpers.addToCart(req.params.id,req.session.user._id).then(()=>{
       
        res.json({status:true})

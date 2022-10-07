@@ -48,22 +48,5 @@
       }) 
     })
 },
-// doSignup:(adminData)=>{
-//   return new Promise(async (resolve, reject)=> {
-//     let SignupStatus = false
-//     let response = {}
-//     let admin= await db.get().collection(collection.ADMIN_COLLECTION).findOne({ email:adminData.email })
-//     {
-//     if(admin){
-//         response.admin=admin
-//         response.status=true
-//         resolve(response)
-//           }
-//             else {
-//                 resolve( {states:false})
-//             }
-//       }
-//     })
-//     },
 
 }

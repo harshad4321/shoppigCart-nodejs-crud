@@ -8,7 +8,7 @@ const token = req.cookies.jwt;
   if (token) {
     try { 
       const decoded = jwt.verify(token, process.env.JWT_SECRET)
-     console.log('>>>>>>>>>>>>>decoded',decoded) 
+     console.log('jwt',decoded) 
       next()
     } catch (error) {
       console.error(error)
