@@ -32,12 +32,12 @@ feature rich e‑commerce app for gadgets.
 - [dotenv](https://www.npmjs.com/package/dotenv)
 - [express-handlebars](https://www.npmjs.com/package/express-handlebars)
 - [mongodb](https://www.mongodb.com/cloud/atlas/lp/try2?utm_source=google&utm_campaign=gs_apac_india_search_core_brand_atlas_desktop&utm_term=mongodb&utm_medium=cpc_paid_search&utm_ad=e&utm_ad_campaign_id=12212624347&adgroup=115749713423&gclid=Cj0KCQjw2_OWBhDqARIsAAUNTTEdcnuSkPl4gy5S5_PxarXLYdMxsWw_F2ouJTMuml64fyWwg6xxUOYaAqruEALw_wcB)
--[JSON Web Tokens - jwt](https://jwt.io/introduction)
--[js-image-zoom](https://www.npmjs.com/package/js-image-zoom)
--[Multer](https://www.npmjs.com/package/multer)
--[razorpay](https://razorpay.com/)
--[morgan](https://www.npmjs.com/package/morgan)
--[fileupload](https://www.npmjs.com/package/express-fileupload)
+- [JSON Web Tokens - jwt](https://jwt.io/introduction)
+- [js-image-zoom](https://www.npmjs.com/package/js-image-zoom)
+- [Multer](https://www.npmjs.com/package/multer)
+- [razorpay](https://razorpay.com/)
+- [morgan](https://www.npmjs.com/package/morgan)
+- [fileupload](https://www.npmjs.com/package/express-fileupload)
 
 ## License
 
