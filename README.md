@@ -7,7 +7,6 @@ this is E-commerce website
 # just a sample 
 
 ![alt text](/public/images/shopping%20WOrld!%20-%20Google%20Chrome%2010_10_2022%2013_03_25.jpg.png)
-
 ![alt text](/public/images/shopping%20WOrld!%20-%20Google%20Chrome%2010_10_2022%2013_03_39.jpg.png)
 ## Features
 feature rich e‑commerce app for gadgets.
