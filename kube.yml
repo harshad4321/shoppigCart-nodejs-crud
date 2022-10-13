@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+
+kind: Deployment
+metadata:
+  name: myapp
+spec:
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+        - name: myapp
+          image: harshad4321/hello
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 3000
+          imagePullPolicy: Never
+---
+apiVersion: apps/v1
+kind: Service
+metadata:
+  name: myapp
+  labels:
+    app: myapp
+  spec:
+  selector:
+    app: myapp
+  ports:
+    - port: 3000
+      targetPort: 3000
+  type: LoadBalancer
