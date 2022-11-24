@@ -3,59 +3,46 @@
 <head>
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,400i,700,900&display=swap" rel="stylesheet">
 </head>
-<style>
-    body {
-        text-align: center;
-        padding: 40px 0;
-        background: #EBF0F5;
-    }
-
-    h1 {
-        color: #88B04B;
-        font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
-        font-weight: 900;
-        font-size: 40px;
-        margin-bottom: 10px;
-    }
-
-    p {
-        color: #404F5E;
-        font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
-        font-size: 20px;
-        margin: 0;
-    }
-
-    i {
-        color: hsl(84, 39%, 57%);
-        font-size: 100px;
-        line-height: 200px;
-        margin-left: -15px;
-    }
-
-    .card {
-        background: white;
-        padding: 60px;
-        border-radius: 4px;
-        box-shadow: 0 2px 3px #C8D0D8;
-        display: inline-block;
-        margin: 95px auto;
-        margin-right: 4px;
-    }
-</style>
-
+<link rel="stylesheet" href="/stylesheets/order-success.css">
 
 <body>
-
-
     <div class="card">
-        <div style="border-radius:200px; height:200px; width:200px; background: #F8FAF5; margin:0 auto;">
-            <i class="checkmark">✓</i>
+        <div class="animation-ctn">
+            <div class="icon icon--order-success svg">
+                <svg xmlns="http://www.w3.org/2000/svg" width="154px" height="154px">
+                    <g fill="none" stroke="#22AE73" stroke-width="2">
+                        <circle cx="77" cy="77" r="72" style="stroke-dasharray:480px, 480px; stroke-dashoffset: 960px;">
+                        </circle>
+                        <circle id="colored" fill="#22AE73" cx="77" cy="77" r="72"
+                            style="stroke-dasharray:480px, 480px; stroke-dashoffset: 960px;"></circle>
+                        <polyline class="st0" stroke="#fff" stroke-width="10" points="43.5,77.8 63.7,97.9 112.2,49.4 "
+                            style="stroke-dasharray:100px, 100px; stroke-dashoffset: 200px;" />
+                    </g>
+                </svg>
+            </div>
         </div>
-        <h1>Success</h1>
-        <p>We received your purchase request;<br /> we'll be in touch shortly!</p>
-        <a href="/orders" class="btn btn-primary">View Orders</a>
-    </div>
 
+        {{!-- <div class="animation-ctn">
+            <div class="icon icon--order-success svg">
+                <svg xmlns="http://www.w3.org/2000/svg" width="154px" height="154px">
+                    <g fill="none" stroke="#F44812" stroke-width="2">
+                        <circle cx="77" cy="77" r="72" style="stroke-dasharray:480px, 480px; stroke-dashoffset: 960px;">
+                        </circle>
+                        <circle id="colored" fill="#F44812" cx="77" cy="77" r="72"
+                            style="stroke-dasharray:480px, 480px; stroke-dashoffset: 960px;"></circle>
+                        <polyline class="st0" stroke="#fff" stroke-width="10" points="43.5,77.8  112.2,77.8 "
+                            style="stroke-dasharray:100px, 100px; stroke-dashoffset: 200px;" />
+                    </g>
+                </svg>
+            </div> --}}
+        </div>
+
+        <div class="success-css">
+            <h1 id="success-css">Success</h1>
+            <p>We received your purchase request;<br /> we'll be in touch shortly!</p>
+            <a href="/orders" class="btn btn-primary">View Orders</a>
+        </div>
+    </div>
 
 </body>
 

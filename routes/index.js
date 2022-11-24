@@ -99,14 +99,14 @@ router.post('/place-order',middleware.verifyLogin,async(req,res)=>{
     console.log(req.body);
    
  })
- router.get( '/order-success',(req,res)=>{ 
+ router.get( '/order-success',middleware.verifyLogin,(req,res)=>{ 
    res.render('user/order-success',{user:req.session.user}) 
  //  console.log(_id) 
  })
 
 
 
- router.get('/orders',protect,async(req,res)=>{ 
+ router.get('/orders',middleware.verifyLogin,protect,async(req,res)=>{ 
     let orders=await userHelpers.getUserOrders(req.session.user._id) 
     
      res.render('user/orders',{user:req.session.user,orders})    
@@ -116,7 +116,7 @@ router.post('/place-order',middleware.verifyLogin,async(req,res)=>{
         res.render('user/view-order-products',{user:req.session.user,products})   
     }) 
 
-    router.post('/verify-payment',protect,(req,res)=>{
+    router.post('/verify-payment',middleware.verifyLogin,protect,(req,res)=>{
     console.log(req.body); 
     userHelpers.verifyPayment(req.body).then(()=>{
        userHelpers.changePaymentStatus(req.body[  'order[receipt]']).then(()=>{

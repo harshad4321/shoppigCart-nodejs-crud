@@ -6,6 +6,7 @@ const middleware    = require("../middleware");
 
 router.get ('/reviews/:page?',(req ,res ,next)=>{
 res.render('user/reviews')
+
 } )
 
 
