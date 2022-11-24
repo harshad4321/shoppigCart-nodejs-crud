@@ -1,12 +1,13 @@
 {
   "name": "shopping-cart",
   "version": "0.0.0",
+  "description": "A fully functioning Node.js shopping cart with razorpay payments.",
   "private": true,
   "engines": {
     "node": "v16.14.2"
   },
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "nodemon ./bin/www"
   },
   "author": "harshad.n",
   "license": "ISC",
@@ -34,7 +35,10 @@
     "mongoose": "^6.5.0",
     "morgan": "~1.9.1",
     "multer": "^1.4.4",
-    "nodemon": "^2.0.19",
-    "razorpay": "^2.8.1"
+    "razorpay": "^2.8.1",
+    "socket.io": "^4.5.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
   }
 }

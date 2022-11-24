@@ -8,9 +8,12 @@ middlewareObject.verifyNotLogin=(req,res,next)=>{
         console.log('req.session.loggedIn>>',req.session.loggedIn)
         return next();
     }else{ 
-    res.redirect('/');
+        res.redirect('/');
     } 
- }
+}
+
+
+//user make them login
 
 middlewareObject.verifyLogin=async(req,res,next)=>{
        console.log("req.session.user",req.session.loggedIn)
