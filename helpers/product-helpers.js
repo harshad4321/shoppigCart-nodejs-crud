@@ -48,11 +48,5 @@
       }) 
     })
 },
-  addProductsReview:(reviews,callback)=>{
-    db.get().collection('product').insertOne(reviews).then((data)=>{
-          
-      console.log("data",data);  
-      callback(data.insertedId)
-    })
-  },    
+    
 }
