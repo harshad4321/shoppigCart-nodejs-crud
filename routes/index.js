@@ -89,15 +89,16 @@ router.post('/place-order',middleware.verifyLogin,async(req,res)=>{
        console.log('orderid***>>>:',orderId);
        if(req.body['payment-method']==='COD'){
           res.json({codSuccess:true})
-       }else {
- userHelpers.generateRazorpay(orderId,totalPrice).then((response)=>{
- res.json(response)
- })
+       } else if(req.body['payment-method']==='ONLINE' ) {
+        userHelpers.generateRazorpay(orderId,totalPrice).then((response)=>{
+       res.json(response)
+        })
        }
- 
+       else{
+
+       }
     })
-    console.log(req.body);
-   
+
  })
  router.get( '/order-success',middleware.verifyLogin,(req,res)=>{ 
    res.render('user/order-success',{user:req.session.user}) 
@@ -108,14 +109,12 @@ router.post('/place-order',middleware.verifyLogin,async(req,res)=>{
 
  router.get('/orders',middleware.verifyLogin,protect,async(req,res)=>{ 
     let orders=await userHelpers.getUserOrders(req.session.user._id) 
-    
      res.render('user/orders',{user:req.session.user,orders})    
     })
     router.get('/view-order-products/:id',async(req,res)=>{  
        let products=await userHelpers.getOrderProducts(req.params.id)  
         res.render('user/view-order-products',{user:req.session.user,products})   
     }) 
-
     router.post('/verify-payment',middleware.verifyLogin,protect,(req,res)=>{
     console.log(req.body); 
     userHelpers.verifyPayment(req.body).then(()=>{

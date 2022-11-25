@@ -70,17 +70,20 @@ header {
   font-size: 20px;
 }
 
+
+.navbar-brand {
+  color: #cc3a2c;
+  text-decoration: none;
+  background-color: transparent;
+  font-family: 'Open Sans', sans-serif;
+  -webkit-text-decoration-skip: objects;
+}
+
 .container-fluid {
   background-color: black;
 }
 
 /* SEARCH BOX */
-.search-title {
-  font-size: 22px;
-  font-weight: 900;
-  text-align: center;
-  color: #ff8b88;
-}
 
 .search-input {
   width: 70%;

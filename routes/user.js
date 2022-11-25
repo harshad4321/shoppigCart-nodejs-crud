@@ -3,7 +3,7 @@ var router = express.Router();
 const userHelpers   = require("../helpers/user-helpers");
 const middleware    = require("../middleware");
 const generateToken = require('../utils/generateToken')
-
+const protect = require ('../middleware/authMiddleware')
 
 
 const {
@@ -108,7 +108,7 @@ req.session.loggedIn=false
 
 // ------------------user profile-------------------------
 
-router.get("/my-profile",middleware.verifyLogin, async (req, res) => {
+router.get("/my-profile",middleware.verifyLogin,protect, async (req, res) => {
    try{
      res.render("user/user-profile", {
        user: req.session.user, cartCount, user_head: true
@@ -119,7 +119,7 @@ router.get("/my-profile",middleware.verifyLogin, async (req, res) => {
    }
  });
  
- router.get('/edit-profile',middleware.verifyLogin,async (req, res) => {
+ router.get('/edit-profile',middleware.verifyLogin,protect,async (req, res) => {
    try{
   
      res.render('user/edit-profile', {
@@ -130,7 +130,7 @@ router.get("/my-profile",middleware.verifyLogin, async (req, res) => {
    }
  })
  
- router.post("/edit-profile/:id",middleware.verifyLogin,(req, res) => {
+ router.post("/edit-profile/:id",middleware.verifyLogin,protect,(req, res) => {
    
    try{
      userHelpers.editUserProfile(req.params.id,req.body).then(() => {
@@ -147,6 +147,7 @@ router.get("/my-profile",middleware.verifyLogin, async (req, res) => {
      res.render('user/change-password', {
        user: req.session.user, user_head: true, cartCount
      })
+   
    }catch (error) {
      console.log(error);
    }
@@ -156,6 +157,9 @@ router.get("/my-profile",middleware.verifyLogin, async (req, res) => {
    try{
       console.log('req.body, req.session.user._id>>>>>>>.',req.body, req.session.user._id)
      userHelpers.changePassword(req.body, req.session.user._id).then((response) => {
+
+
+
        res.redirect('/')
      })
    }catch(error){

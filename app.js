@@ -13,7 +13,7 @@ const productsRouter= require("./routes/products");
 var userRouter      = require('./routes/user');
 var adminRouter     = require('./routes/admin');
 var indexRouter     = require("./routes/index");
-const reviews = require('./routes/reviews');
+
 
 
 const flash = require("connect-flash");
@@ -70,7 +70,7 @@ app.use(
 
 
  db.connect((err)=>{ 
-      if(err) console.log('connection ERROR'+err.red.underline.bold);
+      if(err) console.log('connection ERROR'+err );
       else console.log(`Database is connected to port`.yellow.bold );
         });
 
@@ -81,7 +81,7 @@ app.use("/products", productsRouter);
 app.use('/user', userRouter);
 app.use('/admin', adminRouter);
 app.use('/', indexRouter);
-app.use('/', reviews);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

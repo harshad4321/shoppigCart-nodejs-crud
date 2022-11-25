@@ -256,7 +256,7 @@ return new Promise((resolve,reject)=>{
     let orderObj={
        deliveryDetails:{
             mobile:order.mobile,
-              houseadd:order.houseadd,
+             houseadd:order.houseadd,
             apartment:order.apartment, 
             email:order.email,
             city:order.city,
@@ -276,7 +276,7 @@ return new Promise((resolve,reject)=>{
  
     db.get().collection(collection.ORDER_COLLECTION).insertOne(orderObj).then((response)=>{
         db.get().collection(collection.CART_COLLECTION).deleteOne({user:objectId(order.userId)})
-        console.log('resposce....',response.insertedId)
+        console.log('resposce....>>>>>>>>>>>>>>>>>',response.insertedId)
      resolve(response.insertedId)
     })
 })
@@ -343,33 +343,32 @@ getOrderProducts:(orderId)=>{
     })
 },
 generateRazorpay:(orderId,total)=>{
-   
     return new Promise((resolve,reject)=>{
 
 var options = { 
   amount: total*100,
   currency: "INR",
   receipt:""+orderId,
+   
+
 
 };
 instance.orders.create(options,function(err,order){
     if(err){
         console.log(err) 
     }else 
-    console.log('New order:',order);
-resolve(order)
+    console.log('New order>>>>>>>>>>>>>>.:',order);
+    resolve(order)
 });
        
         })
     },
     verifyPayment:(details)=>{
         return new Promise((resolve,reject)=>{
-         
-         const crypto = require('crypto');
-            
-          let hmac= crypto.createHmac('sha256','u5Yn0DsaZf0QyRxxGFzDtink')
-            
-           hmac.update(details['payment[razorpay_order_id]']+'|'+details['payment[razorpay_payment_id]']);
+
+         const crypto = require('crypto');    
+        let hmac= crypto.createHmac('sha256','u5Yn0DsaZf0QyRxxGFzDtink')   
+         hmac.update(details['payment[razorpay_order_id]']+'|'+details['payment[razorpay_payment_id]']);
          hmac=hmac.digest('hex')
          if(hmac==details[ 'payment[razorpay_signature]']){
              resolve()
@@ -391,6 +390,7 @@ resolve(order)
           })
       })
   },
+
   removeProduct:(details)=>{
     return new Promise ((resolve,reject)=>{
         db.get().collection(collection.CART_COLLECTION)
