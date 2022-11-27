@@ -456,7 +456,8 @@ changePassword: (userData, userId) => {
             resolve(userData)
         })
     })
-}
+},
+
 
 }
 

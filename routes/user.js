@@ -120,8 +120,7 @@ router.get("/my-profile",middleware.verifyLogin,protect, async (req, res) => {
  });
  
  router.get('/edit-profile',middleware.verifyLogin,protect,async (req, res) => {
-   try{
-  
+   try{  
      res.render('user/edit-profile', {
        user: req.session.user, user_head: true, cartCount
      });
@@ -157,8 +156,6 @@ router.get("/my-profile",middleware.verifyLogin,protect, async (req, res) => {
    try{
       console.log('req.body, req.session.user._id>>>>>>>.',req.body, req.session.user._id)
      userHelpers.changePassword(req.body, req.session.user._id).then((response) => {
-
-
 
        res.redirect('/')
      })

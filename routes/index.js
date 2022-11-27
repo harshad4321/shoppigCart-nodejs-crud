@@ -136,16 +136,24 @@ router.post('/place-order',middleware.verifyLogin,async(req,res)=>{
         let user = req.session.user
         let cartCount=null
    if(req.session.user){
-    cartCount=await userHelpers.getCartCount(req.session.user._id)
+      cartCount=await userHelpers.getCartCount(req.session.user._id)
    }
+    let reviews= await productHelpers.getAllProductsReview(req.params.id)
+
+console.log('//////////////commantcommantcommantcommant/////>>>>',reviews);
+
      let product=await productHelpers.getProductDetails(req.params.id)
-     res.render('user/over-view-product',{product,user,cartCount})
+
+     res.render('user/over-view-product',{product,user,cartCount,reviews})
   } catch (error) { 
      res.status(500).send({message: error.message || "Error Occured" });
    }
    }) 
    
   
+
+
+   
 
 
    module.exports=router;

@@ -8,12 +8,13 @@ var logger      = require('morgan');
 
 
 
+
 // require the routes
 const productsRouter= require("./routes/products");
 var userRouter      = require('./routes/user');
 var adminRouter     = require('./routes/admin');
 var indexRouter     = require("./routes/index");
-
+const reviews = require('./routes/reviews');
 
 
 const flash = require("connect-flash");
@@ -81,7 +82,7 @@ app.use("/products", productsRouter);
 app.use('/user', userRouter);
 app.use('/admin', adminRouter);
 app.use('/', indexRouter);
-
+app.use('/', reviews);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -43,10 +43,8 @@ router.get('/logout', (req, res) => {
   }
 })
 
+/* GET products listing. */
 
-
-
-/* GET users listing. */
 router.get("/", verifyLogin, (req, res, next)=> {
   productHelpers.getAllProducts().then((products) => {
     console.log(products);
@@ -62,6 +60,7 @@ router.post("/add-product", (req, res, next) => {
 
     let image=req.files.Image ;
     const imageName = id.jpg ;
+
     console.log(id);   
     image.mv('./public/product-images/'+id+'.jpg',(err)=> {
       if (!err) { 
