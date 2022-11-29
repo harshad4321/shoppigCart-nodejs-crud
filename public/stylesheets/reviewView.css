@@ -17,7 +17,8 @@ ul {
 
 body {
     font-family: 'Roboto', Arial, Helvetica, Sans-serif, Verdana;
-    background: #dee1e3;
+    background: #ffffff;
+
 }
 
 
@@ -32,10 +33,17 @@ svg:not(:root) {
 /** ====================
  * Lista de Comentarios
  =======================*/
+
+.comments-heignt {
+    margin: 60px auto 15px;
+    width: 768px;
+    height: 186px;
+}
+
 .comments-container {
     margin: 60px auto 15px;
     width: 768px;
-    height: 300px;
+    height: 100px;
 }
 
 .comments-container h1 {
@@ -146,6 +154,7 @@ svg:not(:root) {
     -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
     -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+    height: 150px;
 }
 
 .comments-list .comment-box:before,

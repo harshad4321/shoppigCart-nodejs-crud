@@ -10,21 +10,20 @@ const userSignUpValidationRules = () => {
       .isEmpty()
       .isLength({ min: 4 })
       .withMessage('Please enter a password with 4 or more characters'),
-     
-      check("confirm_password")
+
+    check("confirm_password")
       .not()
       .isEmpty()
       .isLength({ min: 4 })
       .withMessage('Passwords must match.')
-    .custom((value,{req})=>{
-      if(value !==req.body.password)
-      { 
-       // trow error if passwords do not match
-        throw new Error("Passwords don't match,please enter correct password");
-      }else {
-        return value;
-    }
-    })
+      .custom((value, { req }) => {
+        if (value !== req.body.password) {
+          // trow error if passwords do not match
+          throw new Error("Passwords don't match,please enter correct password");
+        } else {
+          return value;
+        }
+      })
   ];
 };
 
@@ -35,11 +34,11 @@ const validateSignup = (req, res, next) => {
     var messages = [];
     errors.array().forEach((error) => {
       messages.push(error.msg);
-    
+
     })
     req.flash("error", messages);
     return res.redirect("/user/signup");
-   
+
   }
   next();
 };
@@ -50,7 +49,7 @@ const validateSignup = (req, res, next) => {
 
 module.exports = {
   userSignUpValidationRules,
- 
+
   validateSignup,
- 
+
 };

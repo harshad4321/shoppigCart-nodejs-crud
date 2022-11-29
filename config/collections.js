@@ -1,8 +1,8 @@
-module.exports={
-    PRODUCT_COLLECTION:'product',
-    USER_COLLECTION:'user',
-    CART_COLLECTION:'cart',
-    ORDER_COLLECTION:'order',
-    ADMIN_COLLECTION:'admin',
-    REVIEWS_COLLECTION:'reviews'
+module.exports = {
+    PRODUCT_COLLECTION: 'product',
+    USER_COLLECTION: 'user',
+    CART_COLLECTION: 'cart',
+    ORDER_COLLECTION: 'order',
+    ADMIN_COLLECTION: 'admin',
+    REVIEWS_COLLECTION: 'reviews'
 }  
