@@ -26,7 +26,7 @@ router.get('/reviews/:id?', middleware.verifyLogin, (req, res, next) => {
 router.post('/reviews/:id?', middleware.verifyLogin, (req, res, next) => {
    productHelpers.addProductsReview(req.body, (id) => {
       result = req.body
-      res.redirect('user/reviews');
+      res.redirect('/');
 
    })
 })
@@ -46,34 +46,36 @@ router.get('/update-review/:id', middleware.verifyLogin, async (req, res) => {
       let presentUserId = user._id
       if (presentUserId == userId) {
 
-
          res.render('user/update-review', { review, user })
       } else {
-         console.log('pppppppppoooooooooo');
+         console.log(' you cant access.. ');
+         // req.flash('message', 'You cant access...')
+         res.redirect('/', {
+
+         })
       }
    }
-
 })
 
 router.post("/update-review/:id", middleware.verifyLogin, (req, res) => {
-
    let reviews = req.body
    let userId = reviews.userId
    let user = req.session.user;
    let presentUserId = user._id
-
    if (presentUserId == userId) {
       try {
          productHelpers.editProductsReview(req.params.id, req.body).then(() => {
             res.redirect("/");
          })
       } catch (error) {
-         res.redirect("/");
 
+         res.redirect("/");
       }
 
    } else {
-      console.log('popopppppppooo');
+      console.log('ppppppppppppp');
+      // req.flash('message', 'You cant access...')
+      res.redirect('/')
    }
 });
 
@@ -81,12 +83,10 @@ router.post("/update-review/:id", middleware.verifyLogin, (req, res) => {
 
 
 
-router.get('/delete-review/:id', middleware.verifyLogin, (req, res) => {
-
+router.get('/delete-review/:id?', middleware.verifyLogin, (req, res) => {
    userHelpers.doLogin(req.body).then((response) => {
       if (req.session.user) {
          req.session.loggedIn = true,
-
             user = req.session.user;
          let proId = req.params.id
          productHelpers.deletereview(proId).then((response) => {

@@ -2,6 +2,8 @@ var db = require('../config/connection')
 var collection = require('../config/collections')
 var objectId = require('mongodb').ObjectId
 
+
+
 module.exports = {
   addProduct: (product, callback) => {
     db.get().collection('product').insertOne(product).then((data) => {
@@ -67,10 +69,12 @@ module.exports = {
       let reviews = await db.get().collection(collection.REVIEWS_COLLECTION).find({ productId: objectId(proId) }).toArray()
       resolve(reviews)
     })
-
   },
-  getProductsReview: (reviewId) => {
 
+
+
+
+  getProductsReview: (reviewId) => {
     return new Promise(async (resolve, reject) => {
       let reviews = await db.get().collection(collection.REVIEWS_COLLECTION).findOne({ _id: objectId(reviewId) }).then((reviews) => {
 
@@ -84,7 +88,6 @@ module.exports = {
 
 
   editProductsReview: (reviewId, reviews) => {
-
     return new Promise(async (resolve, reject) => {
       await db.get().collection(collection.REVIEWS_COLLECTION)
         .updateOne({ _id: objectId(reviewId) }, {
@@ -102,9 +105,10 @@ module.exports = {
     })
   },
 
-  deletereview: (userId) => {
+  deletereview: (prUserId) => {
+    console.log('000000000000----user ----000000kkkk>.', prUserId);
     return new Promise((resolve, reject) => {
-      db.get().collection(collection.REVIEWS_COLLECTION).deleteOne({ userId: objectId(userId) }).then((response) => {
+      db.get().collection(collection.REVIEWS_COLLECTION).deleteOne({ userId: objectId(prUserId) }).then((response) => {
         resolve(response)
       })
     })

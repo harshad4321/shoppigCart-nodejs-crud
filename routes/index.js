@@ -9,13 +9,11 @@ const protect = require('../middleware/authMiddleware')
 /* GET home page. */
 router.get("/", async (req, res, next) => {
    let user = req.session.user
-   console.log('>>>>>user>>', user);
    let cartCount = null
    if (req.session.user) {
       cartCount = await userHelpers.getCartCount(req.session.user._id)
    }
    productHelpers.getAllProducts().then((products) => {
-      console.log('products>>>>>>>>>>>>>>>>', products)
       res.render('user/view-product', { products, user, cartCount })
    });
 });
@@ -30,12 +28,10 @@ router.get('/cart', middleware.verifyLogin, async (req, res, next) => {
    if (products.length > 0) {
       totalValue = await userHelpers.getTotalAmount(req.session.user._id)
       let proId = req.params.id
-      console.log('proId>>>>>>>>>>', proId);
       next
    }
 
    let user = req.session.user._id;
-   console.log("user...", user);
    res.render('user/cart', { products, user, totalValue, });
 
 })
@@ -86,7 +82,7 @@ router.post('/place-order', middleware.verifyLogin, async (req, res) => {
    let totalPrice = await userHelpers.getTotalAmount(req.body.userId)
    userHelpers.placeOrder(req.body, products, totalPrice).then((orderId) => {
 
-      console.log('orderid***>>>:', orderId);
+
       if (req.body['payment-method'] === 'COD') {
          res.json({ codSuccess: true })
       } else if (req.body['payment-method'] === 'ONLINE') {
@@ -102,7 +98,7 @@ router.post('/place-order', middleware.verifyLogin, async (req, res) => {
 })
 router.get('/order-success', middleware.verifyLogin, (req, res) => {
    res.render('user/order-success', { user: req.session.user })
-   //  console.log(_id) 
+
 })
 
 
@@ -116,10 +112,8 @@ router.get('/view-order-products/:id', async (req, res) => {
    res.render('user/view-order-products', { user: req.session.user, products })
 })
 router.post('/verify-payment', middleware.verifyLogin, protect, (req, res) => {
-   console.log(req.body);
    userHelpers.verifyPayment(req.body).then(() => {
       userHelpers.changePaymentStatus(req.body['order[receipt]']).then(() => {
-         console.log("Payment successs...")
          res.json({ status: true })
       })
 
@@ -139,12 +133,18 @@ router.get('/over-view-product/:id', async (req, res) => {
          cartCount = await userHelpers.getCartCount(req.session.user._id)
       }
       let reviews = await productHelpers.getAllProductsReview(req.params.id)
-
-      console.log('//////////////{00000000000000000000}t/////>>>>', reviews);
-
       let product = await productHelpers.getProductDetails(req.params.id)
 
-      res.render('user/over-view-product', { product, user, cartCount, reviews })
+      if (user) {
+         let Value = reviews.filter(obj => obj.userId == user._id)
+         console.log('Value>>>>>>xxxxx>', Value);
+
+
+
+         res.render('user/over-view-product', { product, user, cartCount, reviews, Value })
+      }
+
+      res.render('user/over-view-product', { product, user, cartCount, reviews, })
    } catch (error) {
       res.status(500).send({ message: error.message || "Error Occured" });
    }

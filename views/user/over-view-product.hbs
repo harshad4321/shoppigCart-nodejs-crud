@@ -71,6 +71,7 @@
                 {{this.product.Brand}}
             </p>
             {{#if user}}
+
             <button onclick="addToCart('{{this.product._id}}')" class=" btn btn-primary"> Add to Shopping
                 Cart</button>
 
@@ -96,16 +97,14 @@
 <link rel="stylesheet" href="/stylesheets/reviewView.css">
 
 
-
 <!-- Contenedor Principal -->
+
 <div class="comments-heignt">
+    {{#if reviews}}
     <h1>Top reviews from India</h1>
+
     {{#each reviews}}
     <div class="comments-container">
-
-
-
-
         <ul id="comments-list" class="comments-list">
             <li>
                 <div class="comment-main-level">
@@ -130,19 +129,27 @@
                             {{this.commant}}
                         </div>
 
-                        <a href="/delete-review/{{reviews.userId}}" id="successDelete" class="link-warning"
+                        {{#each ../Value}}
+                        {{#if ../Value}}
+
+                        <a href="/delete-review/{{../user._id}}" id="successDelete" class="link-warning"
                             onclick="return confirm('Are you want to delete this review ?')">
                             Delete</a>
+
+
                         <a href="/update-review/{{this._id}}" id="successupdates" class="link-success" {{!--
                             onclick="return confirm('Are you want to update this review ?')"> --}}
                             > update</a>
-                        {{!-- //{{reviews._id}} --}}
+                        {{/if}}
+                        {{/each}}
+
                     </div>
                 </div>
-
     </div>
-
 </div>
 {{/each}}
+{{else}}
+<li class="list-group-item text-center">There are no reviews</li>
+{{/if}}
 </div>
 </div>
