@@ -6,6 +6,12 @@
     box-sizing: border-box;
 }
 
+.btn-primary {
+    color: #fff !important;
+    background-color: #000;
+    border-color: #000;
+}
+
 a {
     color: #03658c;
     text-decoration: none;

@@ -152,7 +152,6 @@ header {
 /* Sider  */
 
 
-
 .carousel-indicators .active {
   background-color: #c38585e0;
 }
@@ -343,16 +342,17 @@ header {
   font-weight: bold;
 }
 
-
-.product-index-box {
-  padding: 0.5em;
-  margin-bottom: 1em;
-  text-align: center;
+.product-index-box .btn {
+  width: 100%;
+  margin: 0.3em auto;
+  color: #fff !important;
+  ;
 }
 
-.product-index-box .btn {
-  width: 90%;
-  margin: 0.3em auto;
+.btn {
+  color: #fff !important;
+  background-color: #000;
+  border-color: #000;
 }
 
 element.style {
