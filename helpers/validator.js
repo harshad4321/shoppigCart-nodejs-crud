@@ -45,11 +45,7 @@ const validateSignup = (req, res, next) => {
 
 
 
-
-
 module.exports = {
   userSignUpValidationRules,
-
   validateSignup,
-
 };

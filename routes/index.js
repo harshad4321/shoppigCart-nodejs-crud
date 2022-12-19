@@ -13,6 +13,7 @@ router.get("/", async (req, res, next) => {
    if (req.session.user) {
       cartCount = await userHelpers.getCartCount(req.session.user._id)
    }
+
    productHelpers.getAllProducts().then((products) => {
       res.render('user/view-product', { products, user, cartCount })
    });
@@ -40,18 +41,13 @@ router.get('/cart', middleware.verifyLogin, async (req, res, next) => {
 // GET: add a product to the shopping cart when "Add to cart" button is pressed
 
 router.get('/add-to-cart/:id', middleware.verifyLogin, (req, res) => {
-
    userHelpers.addToCart(req.params.id, req.session.user._id).then(() => {
-
       res.json({ status: true })
    })
 })
 router.post('/change-product-quantity', (req, res, next) => {
-
    userHelpers.changeproductQuantity(req.body).then(async (response) => {
-
       response.total = await userHelpers.getTotalAmount(req.body.user)
-
       res.json(response)
 
 
@@ -76,12 +72,9 @@ router.get('/place-order', protect, middleware.verifyLogin, async (req, res) => 
 //checking Payment 
 
 router.post('/place-order', middleware.verifyLogin, async (req, res) => {
-
    let products = await userHelpers.getCartProductlist(req.body.userId)
-
    let totalPrice = await userHelpers.getTotalAmount(req.body.userId)
    userHelpers.placeOrder(req.body, products, totalPrice).then((orderId) => {
-
 
       if (req.body['payment-method'] === 'COD') {
          res.json({ codSuccess: true })
@@ -137,13 +130,8 @@ router.get('/over-view-product/:id', async (req, res) => {
 
       if (user) {
          let Value = reviews.filter(obj => obj.userId == user._id)
-         console.log('Value>>>>>>xxxxx>', Value);
-
-
-
          res.render('user/over-view-product', { product, user, cartCount, reviews, Value })
       }
-
       res.render('user/over-view-product', { product, user, cartCount, reviews, })
    } catch (error) {
       res.status(500).send({ message: error.message || "Error Occured" });
