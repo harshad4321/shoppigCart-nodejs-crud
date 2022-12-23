@@ -6,8 +6,9 @@ this is E-commerce website
 
 # just a sample 
 
-![alt text](/public/images/shopping%20WOrld!%20-%20Google%20Chrome%2010_10_2022%2013_03_25.jpg.png)
-![alt text](/public/images/shopping%20WOrld!%20-%20Google%20Chrome%2010_10_2022%2013_03_39.jpg.png)
+![alt text](/public/images/SHOPPING-world-1.png)
+![alt text](/public/images/SHOPPING-world-2.png)
+![alt text](/public/images/SHOPPING-world-3.png)
 ## Features
 feature rich e‑commerce app for gadgets.
 • Implemented all the necessary e‑commerce functionalities like product listing, cart, orders, etc
