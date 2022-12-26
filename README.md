@@ -3,7 +3,6 @@ this is E-commerce website
 
 
 
-
 # just a sample 
 
 ![alt text](/public/images/SHOPPING-world-1.png)
