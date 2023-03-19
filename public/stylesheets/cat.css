@@ -1,0 +1,107 @@
+/* Add some styling to the navbar toggler */
+#my-navbar-container {
+    background-color: #fff;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-toggler {
+    border-color: transparent;
+}
+
+/* Add some hover effects to the navbar items */
+.nav-item:hover .nav-link {
+    color: #28a745 !important;
+}
+
+/* Add some styling to the dropdown button */
+.dropdown-toggle {
+    background-color: #28a745;
+    color: #fff;
+    border-color: #28a745;
+}
+
+/* Add some styling to the dropdown menu items */
+.dropdown-menu a {
+    color: #343a40 !important;
+}
+
+/* Add some styling to the badge in the cart link */
+#cart-count {
+    background-color: #28a745;
+}
+
+/* Add an animation to the navbar toggler icon */
+.navbar-toggler-icon {
+    transition: transform 0.5s;
+}
+
+.navbar-toggler.collapsed .navbar-toggler-icon {
+    transform: rotate(0deg);
+}
+
+.navbar-toggler:not(.collapsed) .navbar-toggler-icon {
+    transform: rotate(90deg);
+}
+
+/* Add an animation to the dropdown button */
+.dropdown-toggle:focus {
+    animation: pulse 0.5s;
+}
+
+/* Navbar animation */
+.navbar {
+    animation: navbar-anim 1s;
+}
+
+@keyframes navbar-anim {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Add an animation to the badge in the cart link */
+#cart-count {
+    animation: shake 0.5s;
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(5px);
+    }
+
+    50% {
+        transform: translateX(0);
+    }
+
+    75% {
+        transform: translateX(-5px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}

@@ -23,7 +23,6 @@ router.get("/", async (req, res, next) => {
 
 // GET: view shopping cart contents
 router.get('/cart', middleware.verifyLogin, async (req, res, next) => {
-
    let products = await userHelpers.getCartProducts(req.session.user._id)
    let totalValue = 0
    if (products.length > 0) {
@@ -101,13 +100,10 @@ router.get('/orders', middleware.verifyLogin, protect, async (req, res) => {
    let orders = await userHelpers.getUserOrders(req.session.user._id)
    res.render('user/orders', { user: req.session.user, orders })
 })
-
-
 router.get('/view-order-products/:id', async (req, res) => {
    let products = await userHelpers.getOrderProducts(req.params.id)
    res.render('user/view-order-products', { user: req.session.user, products })
 })
-
 router.post('/verify-payment', middleware.verifyLogin, protect, (req, res) => {
    userHelpers.verifyPayment(req.body).then(() => {
       userHelpers.changePaymentStatus(req.body['order[receipt]']).then(() => {

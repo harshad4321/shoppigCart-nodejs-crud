@@ -72,7 +72,7 @@ header {
 
 
 .navbar-brand {
-  color: #cc3a2c;
+  color: #f34636;
   text-decoration: none;
   background-color: transparent;
   font-family: 'Open Sans', sans-serif;
@@ -418,6 +418,8 @@ element.style {
 .centerColAlign {
   margin-right: 270px;
 }
+
+
 
 
 
