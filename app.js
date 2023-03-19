@@ -8,7 +8,6 @@ var logger = require('morgan');
 
 
 
-
 // require the routes
 const productsRouter = require("./routes/products");
 var userRouter = require('./routes/user');

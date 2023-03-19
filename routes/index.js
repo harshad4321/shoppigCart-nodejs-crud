@@ -38,6 +38,7 @@ router.get('/cart', middleware.verifyLogin, async (req, res, next) => {
 })
 
 
+
 // GET: add a product to the shopping cart when "Add to cart" button is pressed
 
 router.get('/add-to-cart/:id', middleware.verifyLogin, (req, res) => {
@@ -100,10 +101,13 @@ router.get('/orders', middleware.verifyLogin, protect, async (req, res) => {
    let orders = await userHelpers.getUserOrders(req.session.user._id)
    res.render('user/orders', { user: req.session.user, orders })
 })
+
+
 router.get('/view-order-products/:id', async (req, res) => {
    let products = await userHelpers.getOrderProducts(req.params.id)
    res.render('user/view-order-products', { user: req.session.user, products })
 })
+
 router.post('/verify-payment', middleware.verifyLogin, protect, (req, res) => {
    userHelpers.verifyPayment(req.body).then(() => {
       userHelpers.changePaymentStatus(req.body['order[receipt]']).then(() => {
@@ -127,7 +131,6 @@ router.get('/over-view-product/:id', async (req, res) => {
       }
       let reviews = await productHelpers.getAllProductsReview(req.params.id)
       let product = await productHelpers.getProductDetails(req.params.id)
-
       if (user) {
          let Value = reviews.filter(obj => obj.userId == user._id)
          res.render('user/over-view-product', { product, user, cartCount, reviews, Value })

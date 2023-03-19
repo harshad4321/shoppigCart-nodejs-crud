@@ -1,15 +1,16 @@
 # ShoppigCart-nodejs-CRUD-(Create, Read, Update, Delete)-API
+
 this is E-commerce website
-
-
 
 # just a sample 
 
 ![alt text](/public/images/SHOPPING-world-1.png)
 ![alt text](/public/images/SHOPPING-world-2.png)
 ![alt text](/public/images/SHOPPING-world-3.png)
+
 ## Features
 feature rich e‑commerce app for gadgets.
+
 • Implemented all the necessary e‑commerce functionalities like product listing, cart, orders, etc
 • Additional features include:
 • Image Cropping and Product image zoom
@@ -22,6 +23,7 @@ feature rich e‑commerce app for gadgets.
 
 
 # What technology used ?
+
 - [Nodejs](https://nodejs.org/en/)
 - [express](https://expressjs.com/)
 - [bootstrap](https://getbootstrap.com/)
@@ -35,12 +37,11 @@ feature rich e‑commerce app for gadgets.
 - [JSON Web Tokens - jwt](https://jwt.io/introduction)
 - [js-image-zoom](https://www.npmjs.com/package/js-image-zoom)
 - [Multer](https://www.npmjs.com/package/multer)
-- [razorpay](https://razorpay.com/)
-- [morgan](https://www.npmjs.com/package/morgan)
+- [razorpay] (https://razorpay.com/)
+- [morgan] (https://www.npmjs.com/package/morgan)
 - [fileupload](https://www.npmjs.com/package/express-fileupload)
 
 ## License
-
 
 
 Copyright (c) 2022 

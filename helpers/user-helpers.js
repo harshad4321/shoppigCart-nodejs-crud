@@ -349,8 +349,6 @@ module.exports = {
                 currency: "INR",
                 receipt: "" + orderId,
 
-
-
             };
             instance.orders.create(options, function (err, order) {
                 if (err) {

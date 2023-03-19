@@ -421,22 +421,6 @@ element.style {
 
 
 
-
-
-/* <admin-pannel> */
-#successEdit {
-  color: #fff;
-  background-color: #28a745;
-  border-color: #28a745;
-  margin: 10px;
-  width: 74px;
-}
-
-#successDelete {
-  cursor: pointer;
-  margin: 10px;
-}
-
 /* footer */
 
 .bottom-footer {

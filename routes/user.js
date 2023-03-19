@@ -31,7 +31,6 @@ router.post(
   [
     userSignUpValidationRules(),
     validateSignup,
-
   ],
   (req, res) => {
     userHelpers.exists(req.body).then((response) => {
@@ -70,7 +69,6 @@ router.get('/login', (req, res) => {
 // POST: handle the signin logic
 router.post(
   '/login',
-
   (req, res) => {
     userHelpers.doLogin(req.body).then((response) => {
       if (response.status) {
@@ -138,6 +136,7 @@ router.post("/edit-profile/:id", middleware.verifyLogin, protect, (req, res) => 
 
   }
 });
+
 
 router.get('/change-password', middleware.verifyLogin, async (req, res) => {
   try {

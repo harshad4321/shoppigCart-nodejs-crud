@@ -1,0 +1,44 @@
+{{!-- view-product --}}
+<section>
+    <div class="row mt-5 " style="margin-top: 2px;margin-bottom: 50px;">
+        <link rel="stylesheet" href="/stylesheets/order.css">
+        <div class="container">
+            <table class="table mt-5" id="table_id">
+                <thead>
+                    <tr>
+                        <th scope="col">CUSTOMER</th>
+                        <th scope="col">ORDERED-ON</th>
+                        <th scope="col">Adress</th>
+                        <th scope="col">PaymentMethord</th>
+                        <th scope="col">PRICE</th>
+                        <th scope="col">DELEVERY STATUS</th>
+                        <th scope="col">IMAGES</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each orders }}
+                    <tr>
+                        <td>{{ this.deliveryDetails.fname }} {{ this.deliveryDetails.lname }}</td>
+                        <td>{{ this.date }}</td>
+                        <td>{{ this.deliveryDetails.houseadd }}
+                            <br>{{ this.deliveryDetails.apartment }}
+                            <br>{{ this.deliveryDetails.email }}
+                            <br>{{ this.deliveryDetails.city }}
+                        </td>
+                        <td>{{ this.paymentMethord }}</td>
+                        <td>{{ this.totalAmount }}</td>
+                        <td>{{ this.status }}</td>
+                        <td><img style="width:60px; height:60px" , src="/product-images/{{ this.products.0.item }}.jpg"
+                                , alt="">
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+</section>
+<script>
+    $(function () {
+        $('#table_id').DataTable();
+    });
+</script>

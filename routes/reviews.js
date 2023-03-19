@@ -15,9 +15,6 @@ router.get('/reviews/:id?', middleware.verifyLogin, (req, res, next) => {
       if (req.session.user) {
          req.session.loggedIn = true,
             user = req.session.user;
-
-
-
          res.render('user/reviews', { product, user })
       }
    })
@@ -46,7 +43,6 @@ router.get('/update-review/:id', middleware.verifyLogin, async (req, res) => {
       req.session.loggedIn = true,
          user = req.session.user;
       let review = await productHelpers.getProductsReview(req.params.id)
-
       let userId = review.userId
       let presentUserId = user._id
       if (presentUserId == userId) {
@@ -72,7 +68,6 @@ router.post("/update-review/:id", middleware.verifyLogin, (req, res) => {
             )
          })
       } catch (error) {
-
          res.redirect("/");
       }
    } else {
@@ -92,7 +87,6 @@ router.get('/delete-review/:id?', middleware.verifyLogin, (req, res) => {
          req.session.loggedIn = true,
             user = req.session.user;
          let proId = req.params.id
-
          productHelpers.deletereview(proId).then((response) => {
             res.redirect('/')
          })

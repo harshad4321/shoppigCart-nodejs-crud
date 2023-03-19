@@ -3,6 +3,8 @@ var express = require("express");
 const productHelpers = require("../helpers/product-helpers");
 var router = express.Router();
 var adminHelpers = require('../helpers/admin-helpers')
+var userHelpers = require('../helpers/user-helpers')
+
 
 const verifyLogin = (req, res, next) => {
   if (req.session.adminLogin) {
@@ -50,6 +52,7 @@ router.get("/", verifyLogin, (req, res, next) => {
     res.render("admin/view-products", { admin: true, products });
   });
 });
+
 router.get("/add-product", verifyLogin, (req, res) => {
   res.render("admin/add-product");
 });
@@ -59,7 +62,6 @@ router.post("/add-product", (req, res, next) => {
 
     let image = req.files.Image;
     const imageName = id.jpg;
-
 
     image.mv('./public/product-images/' + id + '.jpg', (err) => {
       if (!err) {
@@ -96,6 +98,21 @@ router.post('/edit-product/:id', (req, res) => {
     }
   })
 })
+
+// ------------------- Orders Datas-----------
+
+
+router.get("/data", verifyLogin, async (req, res) => {
+
+  productHelpers.getAllOrders().then((orders) => {
+
+
+    res.render("admin/orders", { admin: true, orders });
+  });
+
+})
+
+
 
 
 module.exports = router;

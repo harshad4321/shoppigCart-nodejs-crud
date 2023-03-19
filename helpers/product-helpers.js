@@ -46,8 +46,8 @@ module.exports = {
         })
     })
   },
-  addProductsReview: (reviews, callback) => {
 
+  addProductsReview: (reviews, callback) => {
     let reviewobj = {
       userName: reviews.userName,
       commant: reviews.comment,
@@ -56,10 +56,7 @@ module.exports = {
       date: new Date
     }
 
-
-
     db.get().collection('reviews').insertOne(reviewobj).then((data) => {
-
       callback(data.insertedId)
     })
   },
@@ -77,7 +74,6 @@ module.exports = {
   getProductsReview: (reviewId) => {
     return new Promise(async (resolve, reject) => {
       let reviews = await db.get().collection(collection.REVIEWS_COLLECTION).findOne({ _id: objectId(reviewId) }).then((reviews) => {
-
         resolve(reviews)
 
       })
@@ -113,6 +109,17 @@ module.exports = {
       })
     })
   },
+
+  //ORDER
+
+  getAllOrders: () => {
+    return new Promise(async (resolve, reject) => {
+      let orders = await db.get().collection(collection.ORDER_COLLECTION).find().toArray()
+      resolve(orders)
+    })
+  },
+
+
 
 
 }
